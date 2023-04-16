@@ -8,6 +8,7 @@
     "start2": "ts-node db_connect_test.ts"
   },
   "dependencies": {
+    "@types/mysql": "^2.15.21",
     "express": "^4.18.2",
     "mysql": "^2.18.1"
   },
