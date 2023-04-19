@@ -1,6 +1,4 @@
 import express, { Application, Request, Response } from 'express'
-import { getMaxListeners, nextTick } from 'node:process'
-import { afterEach } from 'node:test'
 
 const app: Application = express()
 const PORT = 3000
@@ -11,6 +9,10 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
 const mysql = require("mysql")
+
+
+// functions
+
 const connection = async () => {
     return await mysql.createConnection({
         host: 'db',
@@ -20,10 +22,9 @@ const connection = async () => {
     })
 }
 
-
 async function db_query(query: string, params: string[]) {
     return new Promise((resolve, reject) => {
-        db_con.query(query, (err, rows, fields) => {
+        db_con.query(query, params, (err, rows, fields) => {
             if (err) {
                 reject(err)
             } else {
@@ -33,25 +34,6 @@ async function db_query(query: string, params: string[]) {
         })
     })
 }
-
-
-app.get('/db', async (_req: Request, res: Response) => {
-
-    const query = "SELECT * FROM mail;"
-    // const con = await connection()
-    let con_res: any[] = []
-    try {
-        con_res = (await db_query(query, [])) as any[]
-    } catch (err) {
-        console.log(err)
-    }
-
-
-
-    console.log(con_res)
-    res.send(con_res)
-})
-
 
 async function start() {
     try {
@@ -65,5 +47,39 @@ async function start() {
         }
     }
 }
+
+// routing
+app.get('/db_show', async (_req: Request, res: Response) => {
+
+    const query = "SELECT * FROM todo;"
+    let con_res: any[] = []
+    try {
+        con_res = (await db_query(query, [])) as any[]
+    } catch (err) {
+        console.log(err)
+    }
+    res.send(con_res)
+})
+
+app.get('/db_insert', async (_req: Request, res: Response) => {
+
+    const query = "INSERT INTO todo(task_name, is_done) VALUES(?, ?)"
+    const params = ["1", false] as any[];
+    let con_res: any[] = []
+    try {
+        con_res = (await db_query(query, params)) as any[]
+    } catch (err) {
+        console.log(err)
+    }
+    res.send(con_res)
+})
+
+
+app.get('/', async (_req: Request, res: Response) => {
+    return res.status(200).send({
+        message: 'Hello World!',
+    })
+})
+
 
 start()
