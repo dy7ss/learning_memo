@@ -74,6 +74,20 @@ app.get('/db_insert', async (_req: Request, res: Response) => {
     res.send(con_res)
 })
 
+app.get('/db_insert/:task_name', async (req: Request, res: Response) => {
+
+    const task_name: string = req.params.task_name
+    const query = "INSERT INTO todo(task_name, is_done) VALUES(?, ?)"
+    const params = [task_name, false] as any[];
+    let con_res: any[] = []
+    try {
+        con_res = (await db_query(query, params)) as any[]
+    } catch (err) {
+        console.log(err)
+    }
+    res.send(con_res)
+})
+
 
 app.get('/', async (_req: Request, res: Response) => {
     return res.status(200).send({
