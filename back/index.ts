@@ -58,7 +58,6 @@ app.get('/db_show', async (_req: Request, res: Response) => {
     } catch (err) {
         console.log(err)
     }
-    // res.setHeader('Access-Control-Allow-Origin', '*')
     res.setHeader('Access-Control-Allow-Origin', 'http://localhost:5173')
     res.send(con_res)
 
