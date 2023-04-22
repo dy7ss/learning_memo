@@ -8,8 +8,8 @@ defineProps({
   msg: String,
 })
 const data = reactive({
-  responses: "",
-  keyWord: "",
+  task_name: "",
+  is_done: "",
 });
 
 const getData = async () => {
@@ -23,8 +23,8 @@ const getData = async () => {
   <input type="text" v-model="data.keyWord" @input="inputPrompt" />
   <button @click="getData">Request</button>
   <hr>
-  <div>data.responses:{{ data.responses }}</div>
-  <!-- <div v-for="(item, index) in data.responses.choices">
-    {{ item.text }}
-  </div> -->
+  <!-- <div>data.responses:{{ data.responses }}</div> -->
+  <div v-for="(item, index) in data.responses">
+    {{ item.task_name }} {{ item.is_done }}
+  </div>
 </template>
