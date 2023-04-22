@@ -1,40 +1,30 @@
-<script setup lang="ts">
-defineProps<{
-  msg: string
-}>()
+<script setup>
+import axios from "axios";
+import { reactive } from "vue";
+
+const url = "http://localhost:3000/db_show";
+
+defineProps({
+  msg: String,
+})
+const data = reactive({
+  responses: "",
+  keyWord: "",
+});
+
+const getData = async () => {
+  let result = await axios.get(url);
+  data.responses = result.data;
+};
 </script>
 
 <template>
-  <div class="greetings">
-    <h1 class="green">{{ msg }}</h1>
-    <h3>
-      You’ve successfully created a project with
-      <a href="https://vitejs.dev/" target="_blank" rel="noopener">Vite</a> +
-      <a href="https://vuejs.org/" target="_blank" rel="noopener">Vue 3</a>.
-    </h3>
-  </div>
+  <h1>{{ msg }}</h1>
+  <input type="text" v-model="data.keyWord" @input="inputPrompt" />
+  <button @click="getData">Request</button>
+  <hr>
+  <div>data.responses:{{ data.responses }}</div>
+  <!-- <div v-for="(item, index) in data.responses.choices">
+    {{ item.text }}
+  </div> -->
 </template>
-
-<style scoped>
-h1 {
-  font-weight: 500;
-  font-size: 2.6rem;
-  top: -10px;
-}
-
-h3 {
-  font-size: 1.2rem;
-}
-
-.greetings h1,
-.greetings h3 {
-  text-align: center;
-}
-
-@media (min-width: 1024px) {
-  .greetings h1,
-  .greetings h3 {
-    text-align: left;
-  }
-}
-</style>
