@@ -3,6 +3,8 @@ import axios from "axios";
 import { reactive } from "vue";
 
 const url = "http://localhost:3000/db_show";
+// const url = "api:3000/db_show";
+// const url = "http://172.22.0.3:3000/db_show";
 
 defineProps({
   msg: String,
