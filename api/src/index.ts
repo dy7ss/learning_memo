@@ -14,7 +14,6 @@ const connection = require("./db/connect")
 // functions
 const db_query = require("./db/query")
 
-
 // routing
 app.get('/db_show', async (_req: Request, res: Response) => {
 
@@ -37,6 +36,7 @@ app.get('/db_insert', async (_req: Request, res: Response) => {
     let con_res: any[] = []
     try {
         con_res = (await db_query(query, params, db_con)) as any[]
+
     } catch (err) {
         console.log(err)
     }
@@ -76,5 +76,6 @@ async function start() {
         }
     }
 }
+
 
 start()
