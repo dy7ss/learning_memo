@@ -9,5 +9,6 @@ create table event.mail
 create table event.todo
 (
     task_name varchar(50) not null,
-    is_done boolean not null,
+    is_done boolean not null
+
 );

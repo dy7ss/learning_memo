@@ -9,10 +9,44 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
 const mysql = require("mysql")
-const connection = require("./db/connect")
+
 
 // functions
-const db_query = require("./db/query")
+
+const connection = async () => {
+    return await mysql.createConnection({
+        host: 'db',
+        user: 'root',
+        password: 'rootpassword',
+        database: 'event'
+    })
+}
+
+async function db_query(query: string, params: string[]) {
+    return new Promise((resolve, reject) => {
+        db_con.query(query, params, (err, rows, fields) => {
+            if (err) {
+                reject(err)
+            } else {
+                console.log('The solution is: ', rows)
+                resolve(rows)
+            }
+        })
+    })
+}
+
+async function start() {
+    try {
+        db_con = await connection()
+        app.listen(PORT, () => {
+            console.log(`dev server running at: http://localhost:${PORT}/`)
+        })
+    } catch (e) {
+        if (e instanceof Error) {
+            console.error(e.message)
+        }
+    }
+}
 
 // routing
 app.get('/db_show', async (_req: Request, res: Response) => {
@@ -20,7 +54,7 @@ app.get('/db_show', async (_req: Request, res: Response) => {
     const query = "SELECT * FROM todo;"
     let con_res: any[] = []
     try {
-        con_res = (await db_query(query, [], db_con)) as any[]
+        con_res = (await db_query(query, [])) as any[]
     } catch (err) {
         console.log(err)
     }
@@ -35,8 +69,7 @@ app.get('/db_insert', async (_req: Request, res: Response) => {
     const params = ["1", false] as any[];
     let con_res: any[] = []
     try {
-        con_res = (await db_query(query, params, db_con)) as any[]
-
+        con_res = (await db_query(query, params)) as any[]
     } catch (err) {
         console.log(err)
     }
@@ -50,7 +83,7 @@ app.get('/db_insert/:task_name', async (req: Request, res: Response) => {
     const params = [task_name, false] as any[];
     let con_res: any[] = []
     try {
-        con_res = (await db_query(query, params, db_con)) as any[]
+        con_res = (await db_query(query, params)) as any[]
     } catch (err) {
         console.log(err)
     }
@@ -63,19 +96,6 @@ app.get('/', async (_req: Request, res: Response) => {
         message: 'Hello World!',
     })
 })
-
-async function start() {
-    try {
-        db_con = await connection()
-        app.listen(PORT, () => {
-            console.log(`dev server running at: http://localhost:${PORT}/`)
-        })
-    } catch (e) {
-        if (e instanceof Error) {
-            console.error(e.message)
-        }
-    }
-}
 
 
 start()
