@@ -4,7 +4,10 @@ import { reactive } from "vue";
 
 const url = "http://localhost:3000/db_show";
 const url2 = "http://localhost:3000/db_insert";
+<<<<<<< HEAD
 const url3 = "http://localhost:3000/db_insert2";
+=======
+>>>>>>> 42a8203092a3d595bb85e85fd21531f6c9f669e4
 
 defineProps({
   msg: String,
@@ -28,6 +31,7 @@ const getData = async () => {
 };
 
 const getData2 = async () => {
+<<<<<<< HEAD
   let result = await axios.get(url2);
   data2.responses = result.data;
 };
@@ -40,6 +44,10 @@ const insertData = async () => {
     }
   });
   console.log("text1 is", insert_form)
+=======
+  let result2 = await axios.get(url2);
+  data.responses2 = result2.data;
+>>>>>>> 42a8203092a3d595bb85e85fd21531f6c9f669e4
 };
 </script>
 
@@ -55,6 +63,7 @@ const insertData = async () => {
     {{ item.subject_name }} {{ item.used_time }}
   </div>
 
+<<<<<<< HEAD
   <button @click="getData">show_table</button>
   <hr>
   <div v-for="(item, index) in data.responses">
@@ -70,4 +79,8 @@ const insertData = async () => {
     <input type="button" value="INSERT!" @click="insertData" />
   </form>
   {{ text1 }}
+=======
+  <br><br>
+  <button @click="getData2">Request2</button>
+>>>>>>> 42a8203092a3d595bb85e85fd21531f6c9f669e4
 </template>
