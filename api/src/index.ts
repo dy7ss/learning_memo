@@ -29,22 +29,7 @@ app.get('/db_show', async (_req: Request, res: Response) => {
 
 })
 
-app.get('/db_insert', async (_req: Request, res: Response) => {
-
-    const query = "INSERT INTO learning_list(subject_name, used_time) VALUES(?, ?)"
-    const params = ["LPIC", 12] as any[];
-    let con_res: any[] = []
-    try {
-        con_res = (await db_query(query, params, db_con)) as any[]
-
-    } catch (err) {
-        console.log(err)
-    }
-    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:5173')
-    res.send(con_res)
-})
-
-app.get('/db_insert2', async (req: Request, res: Response) => {
+app.get('/db_insert', async (req: Request, res: Response) => {
 
     const subject_name = req.query.subject_name;
     const used_time = req.query.used_time
@@ -53,16 +38,13 @@ app.get('/db_insert2', async (req: Request, res: Response) => {
     const params = [subject_name, used_time] as any[];
     let con_res: any[] = []
     try {
-        con_res = (await db_query(query, params)) as any[]
+        con_res = (await db_query(query, params, db_con)) as any[]
     } catch (err) {
         console.log(err)
     }
     res.setHeader('Access-Control-Allow-Origin', 'http://localhost:5173')
     res.send(con_res)
 })
-
-
-
 
 app.get('/db_insert/:task_name', async (req: Request, res: Response) => {
 

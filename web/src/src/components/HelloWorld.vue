@@ -1,6 +1,7 @@
 <script setup>
 import axios from "axios";
 import { reactive } from "vue";
+import { onMounted } from "vue";
 
 const url = "http://localhost:3000/db_show";
 const url2 = "http://localhost:3000/db_insert";
@@ -22,6 +23,11 @@ const insert_form = reactive({
   used_time: ""
 })
 
+const memos = reactive({
+  result: ""
+})
+
+
 const getData = async () => {
   let result = await axios.get(url);
   data.responses = result.data;
@@ -32,42 +38,32 @@ const getData2 = async () => {
   data2.responses = result.data;
 };
 
-const insertData = async () => {
-  let result = await axios.get(url3, {
-    params: {
-      subject_name: insert_form.subject_name,
-      used_time: insert_form.used_time
-    }
-  });
-  console.log("text1 is", insert_form)
+const getData3 = async () => {
+  let result = await axios.get(url);
+  console.log("exec getData3")
+  console.log(result)
+  return result
 };
+
+const init_memos = async () => {
+  console.log("start init_memos")
+  const result = await getData3()
+  memos.result = result.data
+}
+
+onMounted(async () => {
+  console.log("on mount")
+  await init_memos()
+})
+
+
 </script>
 
 <template>
   <h1>{{ msg }}</h1>
   <input type="text" v-model="data.keyWord" @input="inputPrompt" />
 
-  <br><br><br><br><br>
-  <button @click="getData2">db_insert</button>
-  <hr>
-  <!-- <div>data.responses:{{ data.responses }}</div> -->
-  <div v-for="(item, index) in data2.responses">
+  <div v-for="(item, index) in memos.result">
     {{ item.subject_name }} {{ item.used_time }}
   </div>
-
-  <button @click="getData">show_table</button>
-  <hr>
-  <div v-for="(item, index) in data.responses">
-    {{ item.subject_name }} {{ item.used_time }}
-  </div>
-  <hr>
-
-  <br><br><br><br><br><br><br>
-  データ登録
-  <form>
-    項目名<input type="text" v-model="insert_form.subject_name" /><br>
-    学習時間<input type="text" v-model="insert_form.used_time" />
-    <input type="button" value="INSERT!" @click="insertData" />
-  </form>
-  {{ text1 }}
 </template>
