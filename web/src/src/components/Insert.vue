@@ -26,5 +26,4 @@ const insertData = async () => {
         学習時間<input type="text" v-model="insert_form.used_time" />
         <input type="button" value="INSERT!" @click="insertData" />
     </form>
-    {{ text1 }}
 </template>
