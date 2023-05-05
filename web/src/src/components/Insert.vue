@@ -10,11 +10,9 @@ const insert_form = reactive({
 })
 
 const insertData = async () => {
-    let result = await axios.get(url2, {
-        params: {
-            subject_name: insert_form.subject_name,
-            used_time: insert_form.used_time
-        }
+    let result = await axios.post(url2, {
+        subject_name: insert_form.subject_name,
+        used_time: insert_form.used_time
     });
 };
 </script>

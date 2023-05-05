@@ -4,7 +4,7 @@ const db_query = async function db_query(query: string, params: string[], db_con
             if (err) {
                 reject(err)
             } else {
-                console.log('The solution is: ', rows)
+                // console.log('The solution is: ', rows)
                 resolve(rows)
             }
         })
