@@ -35,6 +35,32 @@ app.get('/db_show', async (_req: Request, res: Response) => {
 
 })
 
+app.get('/db_search', async (req: Request, res: Response) => {
+
+    // 項目名
+    const subject_name = req.query.subject_name;
+    let query;
+    // 項目名が設定されていないとき
+    if (!subject_name) {
+        query = "SELECT * FROM learning_list;"
+    } else {
+        // 項目名が設定されているとき
+        query = "SELECT * FROM learning_list WHERE subject_name LIKE ?"
+    }
+    // 部分一致検索とするための処理
+    const params = ["%" +subject_name + "%"]
+    
+    let con_res: any[] = []
+    try {
+        con_res = (await db_query(query, params, db_con)) as any[]
+    } catch (err) {
+        console.log(err)
+    }
+    res.send(con_res)
+
+})
+
+
 app.post('/db_insert', [body("used_time").notEmpty(), body("subject_name").notEmpty()], async (req: Request, res: Response) => {
 
     // 項目名
