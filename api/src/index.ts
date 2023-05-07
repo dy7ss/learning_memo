@@ -69,6 +69,7 @@ app.post('/db_insert', [body("used_time").notEmpty(), body("subject_name").notEm
     const used_time = req.body.used_time
 
     // バリデーションチェック
+    // TODO used_time require numeric
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
         return res.status(422).json({ errors: errors.array() })
@@ -82,7 +83,7 @@ app.post('/db_insert', [body("used_time").notEmpty(), body("subject_name").notEm
     } catch (err) {
         console.log(err)
     }
-    res.send(con_res)
+    res.status(201).send("Created")
 })
 
 app.get('/db_insert/:task_name', async (req: Request, res: Response) => {

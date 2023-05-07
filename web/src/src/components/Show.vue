@@ -52,9 +52,10 @@ onMounted(async () => {
 
 <template>
 
+<p>
 <input type="text" v-model="search_word.subject_name">
 <button @click="clickSearchButton">search</button>
-
+</p>
 
   <div v-for="(item, index) in memos.result">
     {{ item.subject_name }} {{ item.used_time }}
