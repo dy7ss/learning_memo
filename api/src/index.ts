@@ -72,6 +72,9 @@ app.post('/db_insert', [body("used_time").notEmpty(), body("subject_name").notEm
     // TODO used_time require numeric
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
+        console.log("subject_name:", subject_name)
+        console.log("used_time", used_time)
+        console.log("error 422.")
         return res.status(422).json({ errors: errors.array() })
     }
 

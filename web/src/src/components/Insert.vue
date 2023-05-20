@@ -30,10 +30,12 @@ const error_flag = reactive({
 
 const insertData = async () => {
     const isFormCorrect = await v$.value.$validate()
-    if (!isFormCorrect) {
-        alert("不適切な値が入力されています")
-        return
-    }
+
+    // バックエンドの検証のため、一時的にコメントアウトする
+    // if (!isFormCorrect) {
+    //     alert("不適切な値が入力されています")
+    //     return
+    // }
 
     let result;
     try{
@@ -64,7 +66,7 @@ const insertData = async () => {
             <div class="error-msg">{{ error.$message }}</div>
         </div>
         <div v-if="error_flag.status_code">
-            不正な値が入力されました。
+            402 Error. 不正な値が入力されました。
         </div>
         <input type="button" value="登録する" @click="insertData" />
     </form>
