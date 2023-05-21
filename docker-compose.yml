@@ -6,8 +6,8 @@ services:
     build:
       dockerfile: web/Dockerfile
       context: .
-    # ports:
-    #   - '5173:5173'
+    ports:
+      - '5173:5173'
     volumes:
       - type: bind
         source: ./web/src
@@ -19,7 +19,7 @@ services:
       dockerfile: api/Dockerfile
       context: .
     ports:
-      - '8081:8081'
+      - '3000:3000'
     volumes:
       - type: bind
         source: ./api/src
