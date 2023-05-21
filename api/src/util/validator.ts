@@ -12,13 +12,19 @@ class Validator{
         return false
     }
 
-    static isPositive(num: string): boolean {
-        const re: RegExp = /-?[1-9][0-9]*/
+    static isPositiveInteger(num: string): boolean {
+
+        // 入力値が空のとき
+        if (!num){
+            return false
+        }
+
+        const re: RegExp = /[1-9][0-9]*/
         
         if (!re.test(num)) {
             return false
         }
-        return false
+        return true
     }
 
     static isInteger(num: string): boolean {
@@ -26,3 +32,5 @@ class Validator{
         return re.test(num)
     }
 }
+
+module.exports = Validator

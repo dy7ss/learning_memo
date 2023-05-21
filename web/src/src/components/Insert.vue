@@ -31,11 +31,10 @@ const error_flag = reactive({
 const insertData = async () => {
     const isFormCorrect = await v$.value.$validate()
 
-    // バックエンドの検証のため、一時的にコメントアウトする
-    // if (!isFormCorrect) {
-    //     alert("不適切な値が入力されています")
-    //     return
-    // }
+    if (!isFormCorrect) {
+        alert("不適切な値が入力されています")
+        return
+    }
 
     let result;
     try{
@@ -48,6 +47,7 @@ const insertData = async () => {
         if (error.response.status === 422){
             error_flag.status_code = error.response.status
             console.log("422 error")
+            alert("不適切な値が入力されています")
         }
     }
 };
