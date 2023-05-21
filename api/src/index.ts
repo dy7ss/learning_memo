@@ -16,6 +16,7 @@ app.use(express.urlencoded({ extended: true }))
 
 const mysql = require("mysql")
 const connection = require("./db/connect")
+const validator = require("./util/validator")
 
 // functions
 const db_query = require("./db/query")
@@ -68,11 +69,25 @@ app.post('/db_insert', [body("used_time").notEmpty(), body("subject_name").notEm
     // 学習時間
     const used_time = req.body.used_time
 
-    // バリデーションチェック
-    // TODO used_time require numeric
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-        return res.status(422).json({ errors: errors.array() })
+    let error_info: any = {
+        has_error: false,
+        columns: []
+    }
+
+    // 項目名が空のとき
+    if (validator.isEmpty(subject_name)){
+        error_info.has_error = true
+        error_info.columns.push("subject_name")
+    }
+
+    // 学習時間が整数値でないとき
+    if (!validator.isPositiveInteger(used_time)){
+        error_info.has_error = true
+        error_info.columns.push("used_time")
+    }
+
+    if (error_info.has_error) {
+        return res.status(422).json({ errors: error_info.columns})
     }
 
     const query = "INSERT INTO learning_list(subject_name, used_time) VALUES(?, ?)"
