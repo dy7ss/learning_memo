@@ -5,7 +5,7 @@ import { onMounted } from "vue";
 
 const url = "http://localhost:3000/db_show";
 const url_search = "http://localhost:3000/db_search"
-const PAGE_LIMIT = 5
+const PAGE_LIMIT = 10
 
 interface Result {
   subject_name: string,
@@ -15,7 +15,7 @@ interface Result {
 interface Memos {
   open_page_num:number,
   result_all:Result[],
-  this_page_record: string[],
+  this_page_record: Result[],
   max_page_num: number
 }
 
@@ -28,10 +28,10 @@ const memos = reactive<Memos>({
 })
 
 const calc_max_page_num = function (result_all) {
-  return Math.ceil(result_all / PAGE_LIMIT)
+  return Math.ceil(result_all.length / PAGE_LIMIT)
 }
 
-const get_page_record = function (result_all: string[], open_page_num: number) {
+const get_page_record = function (result_all: Result[], open_page_num: number) {
   const record_count = result_all.length
 
   // 最大ページ数
@@ -56,6 +56,8 @@ const update_page_record = async (result_all, open_page_num) => {
   memos.this_page_record = await get_page_record (result_all, open_page_num)
 }
 
+
+// 画面項目
 const search_word = reactive({
   subject_name: ""
 })
@@ -65,6 +67,7 @@ const getData = async () => {
   return result
 };
 
+// 検索処理
 const searchData = async () => {
   let result = await axios.get(url_search, {
     params: {
@@ -74,10 +77,14 @@ const searchData = async () => {
   return result
 };
 
+// 検索ボタンを押下したときの処理
 const clickSearchButton = async () => {
   const result = await searchData()
   memos.result_all = result.data
+  console.log("result_all_clicksearchbutton", memos.result_all)
   const page_max_num = await calc_max_page_num(memos.result_all)
+  console.log("pagemaxnum", page_max_num)
+  update_page_record(memos.result_all, 1)
   memos.max_page_num = page_max_num
 
 };
@@ -85,12 +92,12 @@ const clickSearchButton = async () => {
 const init_memos = async () => {
   const result = await getData()
   memos.result_all = result.data
-  const page_max_num = await calc_max_page_num(memos.result_all.length)
+  const page_max_num = await calc_max_page_num(memos.result_all)
+  console.log(page_max_num)
   memos.max_page_num = page_max_num
 }
 
 onMounted(async () => {
-  console.log("on mount")
   await init_memos()
 })
 
@@ -104,10 +111,14 @@ onMounted(async () => {
 </p>
   {{ memos.max_page_num }}
 
-  <div v-for="(item, index) in memos.result_all">
+  <div v-for="(item, index) in memos.this_page_record">
     {{ item.subject_name }} {{ item.used_time }}
   </div>
 
+  <br><hr><br>
+  <div v-for="page_num in memos.max_page_num">
+    <div @click="update_page_record(memos.result_all, page_num)">{{ page_num }}</div>
+  </div>
 
 
 </template>
