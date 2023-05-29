@@ -109,19 +109,20 @@ onMounted(async () => {
 <input type="text" v-model="search_word.subject_name">
 <button @click="clickSearchButton">search</button>
 </p>
-  {{ memos.max_page_num }}
+  <!-- {{ memos.max_page_num }} -->
 
   <div v-for="(item, index) in memos.this_page_record">
     {{ item.subject_name }} {{ item.used_time }}
   </div>
 
   <br><hr><br>
-  <div v-if="memos.max_page_num > 1" @click="update_page_record(memos.result_all, 1)">＜</div>
+  <div class="pagination_link_list">
+  <div class="pagination_link_element" v-if="memos.max_page_num > 1" @click="update_page_record(memos.result_all, 1)">＜</div>
   <div v-for="page_num in memos.max_page_num">
-    <div @click="update_page_record(memos.result_all, page_num)">{{ page_num }}</div>
+    <div class="pagination_link_element" @click="update_page_record(memos.result_all, page_num)">{{ page_num }}</div>
   </div>
-  <div v-if="memos.max_page_num > 1" @click="update_page_record(memos.result_all, memos.max_page_num)">＞</div>
-
+  <div class="pagination_link_element" v-if="memos.max_page_num > 1" @click="update_page_record(memos.result_all, memos.max_page_num)">＞</div>
+</div>
 
 </template>
 
