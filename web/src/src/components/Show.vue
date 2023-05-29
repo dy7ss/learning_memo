@@ -116,9 +116,11 @@ onMounted(async () => {
   </div>
 
   <br><hr><br>
+  <div v-if="memos.max_page_num > 1" @click="update_page_record(memos.result_all, 1)">＜</div>
   <div v-for="page_num in memos.max_page_num">
     <div @click="update_page_record(memos.result_all, page_num)">{{ page_num }}</div>
   </div>
+  <div v-if="memos.max_page_num > 1" @click="update_page_record(memos.result_all, memos.max_page_num)">＞</div>
 
 
 </template>
