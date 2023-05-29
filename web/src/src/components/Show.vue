@@ -92,6 +92,7 @@ const clickSearchButton = async () => {
 const init_memos = async () => {
   const result = await getData()
   memos.result_all = result.data
+  update_page_record(memos.result_all, 1)
   const page_max_num = await calc_max_page_num(memos.result_all)
   console.log(page_max_num)
   memos.max_page_num = page_max_num
