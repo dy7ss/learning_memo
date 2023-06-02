@@ -35,8 +35,12 @@ a,
 } */
 
 div.pagination_link_list{
-  color:blue;
   display: flex;
+}
+
+.pagenation_plain_element{
+  margin-left:5px;
+  margin-right:5px;
 }
 
 .pagination_link_element{

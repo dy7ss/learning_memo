@@ -120,7 +120,7 @@ onMounted(async () => {
   <div class="pagination_link_list">
   <div class="pagination_link_element" v-if="memos.max_page_num > 1" @click="update_page_record(memos.result_all, 1)">≪</div>
   <div v-for="page_num in memos.max_page_num">
-    <div v-if="page_num == memos.open_page_num">{{ page_num }}</div>
+    <div class="pagenation_plain_element" v-if="page_num == memos.open_page_num">{{ page_num }}</div>
     <div v-else class="pagination_link_element" @click="update_page_record(memos.result_all, page_num)">{{ page_num }}</div>
   </div>
   <div class="pagination_link_element" v-if="memos.max_page_num > 1" @click="update_page_record(memos.result_all, memos.max_page_num)">≫</div>
