@@ -57,7 +57,8 @@ const insertData = async () => {
     try {
         result = await axios.post(url2, {
             subject_name: insert_form.subject_name,
-            used_time: insert_form.used_time
+            used_time: insert_form.used_time,
+            study_date: insert_form.study_date
         });
         error_flag.status_code = ""
     } catch (error) {
