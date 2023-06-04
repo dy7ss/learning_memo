@@ -9,12 +9,13 @@ const PAGE_LIMIT = 10
 
 interface Result {
   subject_name: string,
-  used_time: number
+  used_time: number,
+  study_date: string
 }
 
 interface Memos {
-  open_page_num:number,
-  result_all:Result[],
+  open_page_num: number,
+  result_all: Result[],
   this_page_record: Result[],
   max_page_num: number
 }
@@ -41,9 +42,9 @@ const get_page_record = function (result_all: Result[], open_page_num: number) {
     // pass
   }
   // ページネーションが発生するとき
-  
+
   // 取得するレコードの開始地点
-  const pagenation_start = (open_page_num -1) * PAGE_LIMIT
+  const pagenation_start = (open_page_num - 1) * PAGE_LIMIT
 
   // 指定したページ番号で表示するレコード
   const this_page_record = result_all.slice(pagenation_start, pagenation_start + PAGE_LIMIT)
@@ -53,7 +54,7 @@ const get_page_record = function (result_all: Result[], open_page_num: number) {
 
 // 押下されたページ番号に対して、表示するレコードを切り替える
 const update_page_record = async (result_all, open_page_num) => {
-  memos.this_page_record = await get_page_record (result_all, open_page_num)
+  memos.this_page_record = await get_page_record(result_all, open_page_num)
 }
 
 
@@ -105,26 +106,28 @@ onMounted(async () => {
 </script>
 
 <template>
-
-<p>
-<input type="text" v-model="search_word.subject_name">
-<button @click="clickSearchButton">search</button>
-</p>
+  <p>
+    <input type="text" v-model="search_word.subject_name">
+    <button @click="clickSearchButton">search</button>
+  </p>
   <!-- {{ memos.max_page_num }} -->
 
   <div v-for="(item, index) in memos.this_page_record">
-    {{ item.subject_name }} {{ item.used_time }}
+    {{ item.subject_name }} {{ item.used_time }} {{ item.study_date }}
   </div>
 
-  <br><hr><br>
+  <br>
+  <hr><br>
   <div class="pagination_link_list">
-  <div class="pagination_link_element" v-if="memos.max_page_num > 1" @click="update_page_record(memos.result_all, 1)">≪</div>
-  <div v-for="page_num in memos.max_page_num">
-    <div class="pagenation_plain_element" v-if="page_num == memos.open_page_num">{{ page_num }}</div>
-    <div v-else class="pagination_link_element" @click="update_page_record(memos.result_all, page_num)">{{ page_num }}</div>
+    <div class="pagination_link_element" v-if="memos.max_page_num > 1" @click="update_page_record(memos.result_all, 1)">≪
+    </div>
+    <div v-for="page_num in memos.max_page_num">
+      <div class="pagenation_plain_element" v-if="page_num == memos.open_page_num">{{ page_num }}</div>
+      <div v-else class="pagination_link_element" @click="update_page_record(memos.result_all, page_num)">{{ page_num }}
+      </div>
+    </div>
+    <div class="pagination_link_element" v-if="memos.max_page_num > 1"
+      @click="update_page_record(memos.result_all, memos.max_page_num)">≫</div>
   </div>
-  <div class="pagination_link_element" v-if="memos.max_page_num > 1" @click="update_page_record(memos.result_all, memos.max_page_num)">≫</div>
-</div>
-
 </template>
 

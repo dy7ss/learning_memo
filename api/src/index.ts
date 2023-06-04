@@ -32,6 +32,21 @@ app.get('/db_show', async (_req: Request, res: Response) => {
         console.log(err)
     }
     res.setHeader('Access-Control-Allow-Origin', 'http://localhost:5173')
+
+    // 日付のフォーマットをYYYY/MM/DD型にする
+    for (let i = 0; i < con_res.length; i++) {
+        // 学習日が登録されていないとき
+        if (con_res[i].study_date == null) {
+            continue;
+        }
+        const date = new Date(con_res[i].study_date)
+        const year = date.getFullYear()
+        const month = date.getMonth() + 1
+        const day = date.getDate()
+        // TODO 変数の再代入を避ける
+        con_res[i].study_date = `${year}/${month}/${day}`;
+    }
+
     res.send(con_res)
 
 })
@@ -49,14 +64,30 @@ app.get('/db_search', async (req: Request, res: Response) => {
         query = "SELECT * FROM learning_list WHERE subject_name LIKE ?"
     }
     // 部分一致検索とするための処理
-    const params = ["%" +subject_name + "%"]
-    
+    const params = ["%" + subject_name + "%"]
+
     let con_res: any[] = []
     try {
         con_res = (await db_query(query, params, db_con)) as any[]
     } catch (err) {
         console.log(err)
     }
+
+    // 日付のフォーマットをYYYY/MM/DD型にする
+    for (let i = 0; i < con_res.length; i++) {
+        // 学習日が登録されていないとき
+        if (con_res[i].study_date == null) {
+            continue;
+        }
+        const date = new Date(con_res[i].study_date)
+        const year = date.getFullYear()
+        const month = date.getMonth() + 1
+        const day = date.getDate()
+        // TODO 変数の再代入を避ける
+        con_res[i].study_date = `${year}/${month}/${day}`;
+    }
+
+
     res.send(con_res)
 
 })
@@ -68,6 +99,10 @@ app.post('/db_insert', [body("used_time").notEmpty(), body("subject_name").notEm
     const subject_name = req.body.subject_name;
     // 学習時間
     const used_time = req.body.used_time
+    // 入力された学習日
+    const input_study_date = req.body.study_date
+    // 時刻情報を省いた学習日
+    const study_date = input_study_date.split("T")[0]
 
     let error_info: any = {
         has_error: false,
@@ -75,23 +110,23 @@ app.post('/db_insert', [body("used_time").notEmpty(), body("subject_name").notEm
     }
 
     // 項目名が空のとき
-    if (validator.isEmpty(subject_name)){
+    if (validator.isEmpty(subject_name)) {
         error_info.has_error = true
         error_info.columns.push("subject_name")
     }
 
     // 学習時間が整数値でないとき
-    if (!validator.isPositiveInteger(used_time)){
+    if (!validator.isPositiveInteger(used_time)) {
         error_info.has_error = true
         error_info.columns.push("used_time")
     }
 
     if (error_info.has_error) {
-        return res.status(422).json({ errors: error_info.columns})
+        return res.status(422).json({ errors: error_info.columns })
     }
 
-    const query = "INSERT INTO learning_list(subject_name, used_time) VALUES(?, ?)"
-    const params = [subject_name, used_time] as any[];
+    const query = "INSERT INTO learning_list(subject_name, used_time, study_date) VALUES(?, ?, ?)"
+    const params = [subject_name, used_time, study_date] as any[];
     let con_res: any[] = []
     try {
         con_res = (await db_query(query, params, db_con)) as any[]
