@@ -9,7 +9,8 @@ const PAGE_LIMIT = 10
 
 interface Result {
   subject_name: string,
-  used_time: number
+  used_time: number,
+  study_date: string
 }
 
 interface Memos {
@@ -112,7 +113,7 @@ onMounted(async () => {
   <!-- {{ memos.max_page_num }} -->
 
   <div v-for="(item, index) in memos.this_page_record">
-    {{ item.subject_name }} {{ item.used_time }}
+    {{ item.subject_name }} {{ item.used_time }} {{ item.study_date }}
   </div>
 
   <br>
