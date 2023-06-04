@@ -33,3 +33,22 @@ a,
     padding: 0 2rem;
   }
 } */
+
+div.pagination_link_list{
+  display: flex;
+}
+
+.pagenation_plain_element{
+  margin-left:5px;
+  margin-right:5px;
+}
+
+.pagination_link_element{
+  color: blue;
+  margin-left:5px;
+  margin-right:5px;
+}
+
+.pagination_link_element:hover{
+  cursor: pointer;
+}
