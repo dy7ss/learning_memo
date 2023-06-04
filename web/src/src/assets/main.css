@@ -34,21 +34,29 @@ a,
   }
 } */
 
-div.pagination_link_list{
+div.pagination_link_list {
   display: flex;
 }
 
-.pagenation_plain_element{
-  margin-left:5px;
-  margin-right:5px;
+.pagenation_plain_element {
+  margin-left: 5px;
+  margin-right: 5px;
 }
 
-.pagination_link_element{
+.pagination_link_element {
   color: blue;
-  margin-left:5px;
-  margin-right:5px;
+  margin-left: 5px;
+  margin-right: 5px;
 }
 
-.pagination_link_element:hover{
+.pagination_link_element:hover {
   cursor: pointer;
+}
+
+.register_form {
+  width: 400px;
+}
+
+.calendar {
+  width: 200px;
 }
