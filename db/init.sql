@@ -6,5 +6,6 @@ create table event.todo
 create table event.learning_list
 (
     subject_name varchar(100) not null,
-    used_time int not null
+    used_time int not null,
+    study_date date
 );
