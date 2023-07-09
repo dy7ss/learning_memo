@@ -53,9 +53,13 @@ const get_page_record = function (result_all: Result[], open_page_num: number) {
 }
 
 // 押下されたページ番号に対して、表示するレコードを切り替える
-const update_page_record = async (result_all, open_page_num) => {
+const update_page = async (result_all, open_page_num) => {
+  // 表示対象となるレコードを更新する
   memos.this_page_record = await get_page_record(result_all, open_page_num)
+  // 押下されているページ番号の情報を更新する
+  memos.open_page_num = open_page_num
 }
+
 
 
 // 画面項目
@@ -85,7 +89,7 @@ const clickSearchButton = async () => {
   console.log("result_all_clicksearchbutton", memos.result_all)
   const page_max_num = await calc_max_page_num(memos.result_all)
   console.log("pagemaxnum", page_max_num)
-  update_page_record(memos.result_all, 1)
+  update_page(memos.result_all, 1)
   memos.max_page_num = page_max_num
 
 };
@@ -93,7 +97,7 @@ const clickSearchButton = async () => {
 const init_memos = async () => {
   const result = await getData()
   memos.result_all = result.data
-  update_page_record(memos.result_all, 1)
+  update_page(memos.result_all, 1)
   const page_max_num = await calc_max_page_num(memos.result_all)
   console.log(page_max_num)
   memos.max_page_num = page_max_num
@@ -119,15 +123,15 @@ onMounted(async () => {
   <br>
   <hr><br>
   <div class="pagination_link_list">
-    <div class="pagination_link_element" v-if="memos.max_page_num > 1" @click="update_page_record(memos.result_all, 1)">≪
+    <div class="pagination_link_element" v-if="memos.max_page_num > 1" @click="update_page(memos.result_all, 1)">≪
     </div>
     <div v-for="page_num in memos.max_page_num">
       <div class="pagenation_plain_element" v-if="page_num == memos.open_page_num">{{ page_num }}</div>
-      <div v-else class="pagination_link_element" @click="update_page_record(memos.result_all, page_num)">{{ page_num }}
+      <div v-else class="pagination_link_element" @click="update_page(memos.result_all, page_num)">{{ page_num }}
       </div>
     </div>
     <div class="pagination_link_element" v-if="memos.max_page_num > 1"
-      @click="update_page_record(memos.result_all, memos.max_page_num)">≫</div>
+      @click="update_page(memos.result_all, memos.max_page_num)">≫</div>
   </div>
 </template>
 
