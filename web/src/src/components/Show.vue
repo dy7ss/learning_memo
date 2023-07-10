@@ -103,6 +103,27 @@ const init_memos = async () => {
   memos.max_page_num = page_max_num
 }
 
+// ブラウザに表示するページ番号を取得する
+const get_visible_page_num = function (open_page_num, max_page_num) {
+  let result: number[] = []
+  // 表示対象の前後何ページを表示対象とするか
+  const visible_num_before_and_after = 3
+  for (let i = open_page_num - visible_num_before_and_after; i <= open_page_num + visible_num_before_and_after; i++) {
+
+    // 最大ページ数を超過するページ番号は対象外
+    if (i >= max_page_num) {
+      continue
+    }
+    // 正の数以外のページ番号は存在しない
+    if (i <= 0) {
+      continue;
+    }
+    result.push(i)
+  }
+  console.log(result)
+  return result
+}
+
 onMounted(async () => {
   await init_memos()
 })
@@ -125,7 +146,7 @@ onMounted(async () => {
   <div class="pagination_link_list">
     <div class="pagination_link_element" v-if="memos.max_page_num > 1" @click="update_page(memos.result_all, 1)">≪
     </div>
-    <div v-for="page_num in memos.max_page_num">
+    <div v-for="page_num in get_visible_page_num(memos.open_page_num, memos.max_page_num)">
       <div class="pagenation_plain_element" v-if="page_num == memos.open_page_num">{{ page_num }}</div>
       <div v-else class="pagination_link_element" @click="update_page(memos.result_all, page_num)">{{ page_num }}
       </div>
