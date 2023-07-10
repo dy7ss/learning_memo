@@ -108,6 +108,7 @@ const get_visible_page_num = function (open_page_num, max_page_num) {
   let result: number[] = []
   // 表示対象の前後何ページを表示対象とするか
   const visible_num_before_and_after = 3
+
   for (let i = open_page_num - visible_num_before_and_after; i <= open_page_num + visible_num_before_and_after; i++) {
 
     // 最大ページ数を超過するページ番号は対象外
@@ -120,7 +121,6 @@ const get_visible_page_num = function (open_page_num, max_page_num) {
     }
     result.push(i)
   }
-  console.log(result)
   return result
 }
 
