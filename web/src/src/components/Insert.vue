@@ -11,7 +11,8 @@ import '@vuepic/vue-datepicker/dist/main.css'
 
 
 
-const url2 = "http://localhost:3000/db_insert";
+// const url2 = "http://localhost:3000/db_insert";
+const url2 = "https://ubj37r7okf64u5rszmgni6f3ke0mspzc.lambda-url.us-east-1.on.aws/ ";
 
 
 const insert_form = reactive({
@@ -55,10 +56,16 @@ const insertData = async () => {
 
     let result;
     try {
-        result = await axios.post(url2, {
-            subject_name: insert_form.subject_name,
-            used_time: insert_form.used_time,
-            study_date: insert_form.study_date
+        // result = await axios.post(url2, {
+        //     subject_name: insert_form.subject_name,
+        //     used_time: insert_form.used_time,
+        //     study_date: insert_form.study_date
+        result = await axios.get(url2, {
+            params: {
+                subject_name: insert_form.subject_name,
+                used_time: insert_form.used_time,
+                study_date: insert_form.study_date
+            }
         });
         error_flag.status_code = ""
     } catch (error) {

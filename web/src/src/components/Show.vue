@@ -3,7 +3,8 @@ import axios from "axios";
 import { reactive } from "vue";
 import { onMounted } from "vue";
 
-const url = "http://localhost:3000/db_show";
+// const url = "http://localhost:3000/db_show";
+const url = "https://zc2sgtjlxkryfifli5ogozn2oa0ybfdt.lambda-url.us-east-1.on.aws/"
 const url_search = "http://localhost:3000/db_search"
 const PAGE_LIMIT = 10
 
