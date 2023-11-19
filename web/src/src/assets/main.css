@@ -60,3 +60,11 @@ div.pagination_link_list {
 .calendar {
   width: 200px;
 }
+
+.menu_list{
+  text-align: center;
+}
+
+.menu{
+  padding: 5px
+}

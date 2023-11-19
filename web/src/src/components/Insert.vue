@@ -18,7 +18,8 @@ const url2 = "https://ubj37r7okf64u5rszmgni6f3ke0mspzc.lambda-url.us-east-1.on.a
 const insert_form = reactive({
     subject_name: "",
     used_time: "",
-    study_date: new Date()
+    study_date: new Date(),
+    category: "",
 })
 const rules = {
     subject_name: {
@@ -28,6 +29,10 @@ const rules = {
     used_time: {
         required,
         integer
+    },
+    category: {
+        required,
+        maxLength: maxLength(20)
     },
 }
 
@@ -64,7 +69,8 @@ const insertData = async () => {
             params: {
                 subject_name: insert_form.subject_name,
                 used_time: insert_form.used_time,
-                study_date: insert_form.study_date
+                study_date: insert_form.study_date,
+                category: insert_form.category,
             }
         });
         error_flag.status_code = ""
@@ -88,6 +94,11 @@ const insertData = async () => {
             <div class="input-errors" v-for="error of v$.subject_name.$errors" :key="error.$uid">
                 <div class="error-msg">{{ error.$message }}</div>
             </div>
+            カテゴリー<input type="text" v-model="insert_form.category" /><br>
+            <div class="input-errors" v-for="error of v$.category.$errors" :key="error.$uid">
+                <div class="error-msg">{{ error.$message }}</div>
+            </div>
+
             学習時間<input type="text" v-model="insert_form.used_time" /><br>
             <div class="input-errors" v-for="error of v$.used_time.$errors" :key="error.$uid">
                 <div class="error-msg">{{ error.$message }}</div>

@@ -3,7 +3,13 @@
 </script>
 
 <template>
-  <router-link to="/">Show</router-link>　
-  <router-link to="/insert">Insert</router-link>　
+  <div class="menu_list">
+    <span class="menu">
+      <router-link to="/">Show</router-link>
+    </span>
+    <span class="menu">
+      <router-link to="/insert">Insert</router-link>
+    </span>
   <router-view />
+  </div>
 </template>

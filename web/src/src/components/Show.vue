@@ -11,7 +11,8 @@ const PAGE_LIMIT = 10
 interface Result {
   subject_name: string,
   used_time: number,
-  study_date: string
+  study_date: string,
+  category: string
 }
 
 interface Memos {
@@ -116,10 +117,23 @@ onMounted(async () => {
     <button @click="clickSearchButton">search</button>
   </p>
   <!-- {{ memos.max_page_num }} -->
-
-  <div v-for="(item, index) in memos.this_page_record">
-    {{ item.subject_name }} {{ item.used_time }} {{ item.study_date }}
+  <div class="memo_container">
+    <div class="row header">
+      <div class="cell">項目名</div>
+      <div class="cell">カテゴリー</div>
+      <div class="cell">学習時間</div>
+      <div class="cell">学習日</div>
+    </div>
+    <div v-for="(item, index) in memos.this_page_record">
+      <div class="row">
+        <div class="cell">{{ item.subject_name }}</div>
+        <div class="cell">{{ item.category }}</div>
+        <div class="cell">{{ item.used_time }}</div>
+        <div class="cell">{{ item.study_date }}</div>
+      </div>
+    </div>
   </div>
+
 
   <br>
   <hr><br>
