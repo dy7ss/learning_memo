@@ -53,10 +53,6 @@ div.pagination_link_list {
   cursor: pointer;
 }
 
-.register_form {
-  width: 400px;
-}
-
 .calendar {
   width: 200px;
 }
@@ -71,6 +67,7 @@ div.pagination_link_list {
 
 details {
   padding: 10px;
+  justify-content:center;
 }
 
 /* summary */
@@ -82,8 +79,8 @@ details summary {
   font-weight: bold;
   background: #7B61FF;
   color: #fff;
-  /* width: 300px; */
-  width: 100%;
+  width: 400px;
+  /* width: 100%; */
   padding: 16px;
   border-radius: 8px;
   list-style: none;
@@ -133,6 +130,7 @@ details ul {
   opacity: 0;
   transform: translateY(-20px);
   transition: all 0.3s ease;
+  width: 400px;
 }
 details ul li {
   padding: 12px;
@@ -154,4 +152,48 @@ details[open] summary span {
 details[open] ul {
   opacity: 1;
   transform: translateY(0);
+}
+details[open] .column_name{
+  padding-right: 5px;
+}
+
+
+.register_form {
+  display:flex
+}
+
+.register_form .row{
+  display: flex;
+  flex-direction: row;
+}
+
+
+.register_form .cell{
+  width: 100px;
+}
+
+.register_form .title{
+  /* flex: 1; */
+  padding: 8px;
+  border: 1px solid #ccc;
+  text-align: left;
+  min-width: 0;
+  /* flex-basis: 150px; 列1の幅を固定 */
+  width: 100px;
+  overflow-wrap: break-word;
+}
+
+.register_form .content{
+  /* flex: 1; */
+  padding: 8px;
+  border: 1px solid #ccc;
+  text-align: center;
+  min-width: 0;
+  /* flex-basis: 150px; 列1の幅を固定 */
+  width: 150px;
+  overflow-wrap: break-word;
+}
+
+.show_content{
+  text-align: center;
 }

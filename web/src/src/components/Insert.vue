@@ -71,6 +71,7 @@ const insertData = async () => {
                 used_time: insert_form.used_time,
                 study_date: insert_form.study_date,
                 category: insert_form.category,
+                remarks: insert_form.remarks,
             }
         });
         error_flag.status_code = ""
@@ -86,28 +87,42 @@ const insertData = async () => {
 </script>
 
 <template>
+    <p>データ登録</p>
     <div class="register_form">
-        <p>データ登録</p>
+        
+
         <form>
-            <div :class="{ error: v$.subject_name.$errors.length }"></div>
-            項目名<input type="text" v-model="insert_form.subject_name" /><br>
-            <div class="input-errors" v-for="error of v$.subject_name.$errors" :key="error.$uid">
-                <div class="error-msg">{{ error.$message }}</div>
+            <div class="row">
+                <div :class="{ error: v$.subject_name.$errors.length }"></div>
+                <div class="title">項目名</div>
+                <input type="text" v-model="insert_form.subject_name" /><br>
+                <div class="input-errors" v-for="error of v$.subject_name.$errors" :key="error.$uid">
+                    <div class="error-msg">{{ error.$message }}</div>
+                </div>
             </div>
-            カテゴリー<input type="text" v-model="insert_form.category" /><br>
-            <div class="input-errors" v-for="error of v$.category.$errors" :key="error.$uid">
-                <div class="error-msg">{{ error.$message }}</div>
+            <div class="row">
+                <div class="title">カテゴリー</div>
+                <input type="text" v-model="insert_form.category" /><br>
+                <div class="input-errors" v-for="error of v$.category.$errors" :key="error.$uid">
+                    <div class="error-msg">{{ error.$message }}</div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="title">学習時間</div>
+                <input type="text" v-model="insert_form.used_time" /><br>
+                <div class="input-errors" v-for="error of v$.used_time.$errors" :key="error.$uid">
+                    <div class="error-msg">{{ error.$message }}</div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="title">学習日</div>
+                <input type="date" id="start" name="trip-start" v-model="insert_form.study_date" />
+                <br>
             </div>
 
-            学習時間<input type="text" v-model="insert_form.used_time" /><br>
-            <div class="input-errors" v-for="error of v$.used_time.$errors" :key="error.$uid">
-                <div class="error-msg">{{ error.$message }}</div>
-            </div>
-            学習日
-            <VueDatePicker class="calendar" v-model="insert_form.study_date" format="yyyy-MM-dd"
-                :enable-time-picker="false"></VueDatePicker>
-            <div v-if="error_flag.status_code">
-                402 Error. 不正な値が入力されました。
+            <div class="row">
+                <div class="title">備考</div>
+                <textarea id="story" name="story" rows="5" cols="33" v-model="insert_form.remarks"></textarea>
             </div>
             <br>
             <input type="button" value="登録する" @click="insertData" />

@@ -12,7 +12,8 @@ interface Result {
   subject_name: string,
   used_time: number,
   study_date: string,
-  category: string
+  category: string,
+  remarks: string,
 }
 
 interface Memos {
@@ -112,56 +113,56 @@ onMounted(async () => {
 </script>
 
 <template>
-  <p>
-    <input type="text" v-model="search_word.subject_name">
-    <button @click="clickSearchButton">search</button>
-  </p>
-  <!-- {{ memos.max_page_num }} -->
-  <!-- <div class="memo_container">
-    <div class="row header">
-      <div class="cell">項目名</div>
-      <div class="cell">カテゴリー</div>
-      <div class="cell">学習時間</div>
-      <div class="cell">学習日</div>
-    </div>
+  <div class="show_content">
+    <p>
+      <input type="text" v-model="search_word.subject_name">
+      <button @click="clickSearchButton">search</button>
+    </p>
+    <!-- {{ memos.max_page_num }} -->
+    <!-- <div class="memo_container">
+      <div class="row header">
+        <div class="cell">項目名</div>
+        <div class="cell">カテゴリー</div>
+        <div class="cell">学習時間</div>
+        <div class="cell">学習日</div>
+      </div>
+      <div v-for="(item, index) in memos.this_page_record">
+        <div class="row">
+          <div class="cell">{{ item.subject_name }}</div>
+          <div class="cell">{{ item.category }}</div>
+          <div class="cell">{{ item.used_time }}</div>
+          <div class="cell">{{ item.study_date }}</div>
+        </div>
+      </div>
+    </div> -->
     <div v-for="(item, index) in memos.this_page_record">
-      <div class="row">
-        <div class="cell">{{ item.subject_name }}</div>
-        <div class="cell">{{ item.category }}</div>
-        <div class="cell">{{ item.used_time }}</div>
-        <div class="cell">{{ item.study_date }}</div>
-      </div>
-    </div>
-  </div> -->
-  <div v-for="(item, index) in memos.this_page_record">
-    <details>
-      <summary>
-        {{ item.subject_name }} {{ item.category }}<span />
-      </summary>
-  
-    <ul>
-      <li><strong>学習日</strong> {{ item.study_date }}</li>
-      <li><strong>学習時間</strong> {{ item.used_time }}</li>
-      <li><strong></strong>これは備考です。</li>
-    </ul>
-  
-</details>
-</div>
-
-
-
-  <br>
-  <hr><br>
-  <div class="pagination_link_list">
-    <div class="pagination_link_element" v-if="memos.max_page_num > 1" @click="update_page(memos.result_all, 1)">≪
-    </div>
-    <div v-for="page_num in memos.max_page_num">
-      <div class="pagenation_plain_element" v-if="page_num == memos.open_page_num">{{ page_num }}</div>
-      <div v-else class="pagination_link_element" @click="update_page(memos.result_all, page_num)">{{ page_num }}
-      </div>
-    </div>
-    <div class="pagination_link_element" v-if="memos.max_page_num > 1"
-      @click="update_page(memos.result_all, memos.max_page_num)">≫</div>
+      <details>
+        <summary>
+          {{ item.subject_name }} {{ item.category }}<span />
+        </summary>
+    
+      <ul>
+        <li><strong><span class="column_name">学習日</span></strong> {{ item.study_date }}</li>
+        <li><strong><span class="column_name">学習時間</span></strong> {{ item.used_time }}</li>
+        <li><strong><span class="column_name">備考</span></strong>{{ item.remarks }}</li>
+      </ul>
+    
+  </details>
   </div>
+
+    <br>
+    <hr><br>
+    <div class="pagination_link_list">
+      <div class="pagination_link_element" v-if="memos.max_page_num > 1" @click="update_page(memos.result_all, 1)">≪
+      </div>
+      <div v-for="page_num in memos.max_page_num">
+        <div class="pagenation_plain_element" v-if="page_num == memos.open_page_num">{{ page_num }}</div>
+        <div v-else class="pagination_link_element" @click="update_page(memos.result_all, page_num)">{{ page_num }}
+        </div>
+      </div>
+      <div class="pagination_link_element" v-if="memos.max_page_num > 1"
+        @click="update_page(memos.result_all, memos.max_page_num)">≫</div>
+    </div>
+</div>
 </template>
 
