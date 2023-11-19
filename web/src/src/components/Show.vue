@@ -117,7 +117,7 @@ onMounted(async () => {
     <button @click="clickSearchButton">search</button>
   </p>
   <!-- {{ memos.max_page_num }} -->
-  <div class="memo_container">
+  <!-- <div class="memo_container">
     <div class="row header">
       <div class="cell">項目名</div>
       <div class="cell">カテゴリー</div>
@@ -132,7 +132,22 @@ onMounted(async () => {
         <div class="cell">{{ item.study_date }}</div>
       </div>
     </div>
-  </div>
+  </div> -->
+  <div v-for="(item, index) in memos.this_page_record">
+    <details>
+      <summary>
+        {{ item.subject_name }} {{ item.category }}<span />
+      </summary>
+  
+    <ul>
+      <li><strong>学習日</strong> {{ item.study_date }}</li>
+      <li><strong>学習時間</strong> {{ item.used_time }}</li>
+      <li><strong></strong>これは備考です。</li>
+    </ul>
+  
+</details>
+</div>
+
 
 
   <br>
