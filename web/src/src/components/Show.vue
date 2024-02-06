@@ -2,10 +2,8 @@
 import axios from "axios";
 import { reactive } from "vue";
 import { onMounted } from "vue";
+import { URL } from "@/constants"
 
-// const url = "http://localhost:3000/db_show";
-const url = "https://zc2sgtjlxkryfifli5ogozn2oa0ybfdt.lambda-url.us-east-1.on.aws/"
-const url_search = "http://localhost:3000/db_search"
 const PAGE_LIMIT = 10
 
 interface Result {
@@ -71,13 +69,13 @@ const search_word = reactive({
 })
 
 const getData = async () => {
-  let result = await axios.get(url);
+  let result = await axios.get(URL.MEMO_GET);
   return result
 };
 
 // 検索処理
 const searchData = async () => {
-  let result = await axios.get(url_search, {
+  let result = await axios.get(URL.MEMO_GET, {
     params: {
       subject_name: search_word.subject_name
     }
@@ -140,15 +138,15 @@ onMounted(async () => {
         <summary>
           {{ item.subject_name }} {{ item.category }}<span />
         </summary>
-    
-      <ul>
-        <li><strong><span class="column_name">学習日</span></strong> {{ item.study_date }}</li>
-        <li><strong><span class="column_name">学習時間</span></strong> {{ item.used_time }}</li>
-        <li><strong><span class="column_name">備考</span></strong>{{ item.remarks }}</li>
-      </ul>
-    
-  </details>
-  </div>
+
+        <ul>
+          <li><strong><span class="column_name">学習日</span></strong> {{ item.study_date }}</li>
+          <li><strong><span class="column_name">学習時間</span></strong> {{ item.used_time }}</li>
+          <li><strong><span class="column_name">備考</span></strong>{{ item.remarks }}</li>
+        </ul>
+
+      </details>
+    </div>
 
     <br>
     <hr><br>
@@ -163,6 +161,6 @@ onMounted(async () => {
       <div class="pagination_link_element" v-if="memos.max_page_num > 1"
         @click="update_page(memos.result_all, memos.max_page_num)">≫</div>
     </div>
-</div>
+  </div>
 </template>
 
