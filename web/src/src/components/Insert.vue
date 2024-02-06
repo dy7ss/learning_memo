@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import axios from "axios";
 import { reactive } from "vue";
 import { useVuelidate } from '@vuelidate/core'
@@ -89,7 +89,7 @@ const insertData = async () => {
 <template>
     <p>データ登録</p>
     <div class="register_form">
-        
+
 
         <form>
             <div class="row">
