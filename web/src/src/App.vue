@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 
 </script>
 
@@ -10,6 +10,6 @@
     <span class="menu">
       <router-link to="/insert">Insert</router-link>
     </span>
-  <router-view />
+    <router-view />
   </div>
 </template>

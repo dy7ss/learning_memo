@@ -20,6 +20,7 @@ const insert_form = reactive({
     used_time: "",
     study_date: new Date(),
     category: "",
+    remarks: ""
 })
 const rules = {
     subject_name: {
@@ -75,7 +76,7 @@ const insertData = async () => {
             }
         });
         error_flag.status_code = ""
-    } catch (error) {
+    } catch (error: any) {
         if (error.response.status === 422) {
             error_flag.status_code = error.response.status
             console.log("422 error")
