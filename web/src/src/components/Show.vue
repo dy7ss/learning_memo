@@ -2,25 +2,11 @@
 import axios from "axios";
 import { reactive } from "vue";
 import { onMounted } from "vue";
-import { URL } from "@/constants"
+import { URL } from "@/constants";
+import type { Memos } from "@/types/Memos";
+import type { Memo } from "@/types/Memo";
 
 const PAGE_LIMIT = 10
-
-interface Result {
-  subject_name: string,
-  used_time: number,
-  study_date: string,
-  category: string,
-  remarks: string,
-}
-
-interface Memos {
-  open_page_num: number,
-  result_all: Result[],
-  this_page_record: Result[],
-  max_page_num: number
-}
-
 
 const memos = reactive<Memos>({
   open_page_num: 1,
@@ -33,7 +19,7 @@ const calc_max_page_num = function (result_all) {
   return Math.ceil(result_all.length / PAGE_LIMIT)
 }
 
-const get_page_record = function (result_all: Result[], open_page_num: number) {
+const get_page_record = function (result_all: Memo[], open_page_num: number) {
   const record_count = result_all.length
 
   // 最大ページ数
