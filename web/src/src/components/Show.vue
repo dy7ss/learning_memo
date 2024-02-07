@@ -3,6 +3,7 @@ import { reactive } from "vue";
 import { onMounted } from "vue";
 import type { Memos } from "@/types/Memos";
 import { useComposition } from "@/composition"
+import MemoPanel from "@/components/MemoPanel.vue"
 
 const { update_page, init_memos, clickSearchButton } = useComposition();
 
@@ -31,18 +32,7 @@ onMounted(async () => {
       <button @click="clickSearchButton(memos, search_word)">search</button>
     </p>
     <div v-for="(item, index) in memos.this_page_record">
-      <details>
-        <summary>
-          {{ item.subject_name }} {{ item.category }}<span />
-        </summary>
-
-        <ul>
-          <li><strong><span class="column_name">学習日</span></strong> {{ item.study_date }}</li>
-          <li><strong><span class="column_name">学習時間</span></strong> {{ item.used_time }}</li>
-          <li><strong><span class="column_name">備考</span></strong>{{ item.remarks }}</li>
-        </ul>
-
-      </details>
+      <MemoPanel :item="item"></MemoPanel>
     </div>
 
     <br>
