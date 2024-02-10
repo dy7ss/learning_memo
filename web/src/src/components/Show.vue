@@ -2,22 +2,18 @@
 import { reactive } from "vue";
 import { onMounted } from "vue";
 import type { Memos } from "@/types/Memos";
-import { useComposition } from "@/composition"
-import MemoPanel from "@/components/MemoPanel.vue"
+import { useComposition } from "@/composition";
+import MemoPanel from "@/components/MemoPanel.vue";
+import { useMemoStore } from '@/stores/memo';
 
 const { update_page, init_memos, clickSearchButton } = useComposition();
 
-const memos = reactive<Memos>({
-  open_page_num: 1,
-  result_all: [],
-  this_page_record: [],
-  max_page_num: 1
-})
+const memoStore = useMemoStore()
 
-// 画面項目
-const search_word = reactive({
-  subject_name: ""
-})
+const memos = memoStore.memos;
+
+const search_word = memoStore.search_word;
+
 
 onMounted(async () => {
   await init_memos(memos)
