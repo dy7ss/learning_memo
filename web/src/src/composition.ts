@@ -2,6 +2,7 @@
 import { ref } from 'vue';
 import axios from "axios";
 import type { Memo } from "@/types/Memo";
+import type { RegisterForm } from "@/types/RegisterForm";
 import { URL, PAGE_LIMIT } from "@/constants";
 
 export const useComposition = function () {
@@ -74,9 +75,12 @@ export const useComposition = function () {
 
     };
 
-
-
-
+    const register_memo = async (form: RegisterForm) => {
+        let result = await axios.get(URL.MEMO_REGISTER, {
+            params: form
+        });
+        return result
+    };
 
     return {
         calc_max_page_num,
@@ -85,6 +89,7 @@ export const useComposition = function () {
         getData,
         searchData,
         init_memos,
-        clickSearchButton
+        clickSearchButton,
+        register_memo
     }
 }
