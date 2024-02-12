@@ -1,9 +1,15 @@
-<script setup>
+<script setup lang="ts">
 
 </script>
 
 <template>
-  <router-link to="/">Show</router-link>　
-  <router-link to="/insert">Insert</router-link>　
-  <router-view />
+  <div class="menu_list">
+    <span class="menu">
+      <router-link to="/">Show</router-link>
+    </span>
+    <span class="menu">
+      <router-link to="/insert">Insert</router-link>
+    </span>
+    <router-view />
+  </div>
 </template>

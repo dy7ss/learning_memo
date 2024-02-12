@@ -72,3 +72,33 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+.memo_container{
+  display: flex;
+  flex-direction: column;
+  max-width: 600px;
+  margin: 0 auto;
+  border: 1px solid #ccc;
+  border-collapse: collapse;
+}
+
+.header {
+  font-weight: bold;
+  background-color: #f2f2f2;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+}
+
+.cell {
+  /* flex: 1; */
+  padding: 8px;
+  border: 1px solid #ccc;
+  text-align: center;
+  min-width: 0;
+  /* flex-basis: 150px; 列1の幅を固定 */
+  width: 150px;
+  overflow-wrap: break-word;
+}

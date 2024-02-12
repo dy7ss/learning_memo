@@ -53,10 +53,147 @@ div.pagination_link_list {
   cursor: pointer;
 }
 
-.register_form {
-  width: 400px;
-}
-
 .calendar {
   width: 200px;
+}
+
+.menu_list{
+  text-align: center;
+}
+
+.menu{
+  padding: 5px
+}
+
+details {
+  padding: 10px;
+  justify-content:center;
+}
+
+/* summary */
+details summary {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 16px;
+  font-weight: bold;
+  background: #7B61FF;
+  color: #fff;
+  width: 400px;
+  /* width: 100%; */
+  padding: 16px;
+  border-radius: 8px;
+  list-style: none;
+  cursor: pointer;
+  outline: none;
+  transition: all 0.3s ease;
+}
+details summary::-webkit-details-marker {
+  display: none;
+}
+
+/* summaryのchevronアイコン部分 */
+details summary span {
+  position: relative;
+  transform: rotate(0deg);
+  transform-origin: -8px 0;
+  transition: all 0.3s ease;
+}
+details summary span:before,
+details summary span:after {
+  position: absolute;
+  content: "";
+  background: #fff;
+  width: 12px;
+  height: 2px;
+  top: 50%;
+}
+details summary span:before {
+  right: 8px;
+  transform: rotate(45deg);
+}
+details summary span:after {
+  right: 0;
+  transform: rotate(-45deg);
+}
+
+/* 詳細部分 */
+details ul {
+  font-size: 14px;
+  background: #fff;
+  border: 2px solid #7B61FF;
+  color: #7B61FF;
+  border-radius: 0 0 8px 8px;
+  margin: 0;
+  padding: 8px 12px;
+  list-style: none;
+  opacity: 0;
+  transform: translateY(-20px);
+  transition: all 0.3s ease;
+  width: 400px;
+}
+details ul li {
+  padding: 12px;
+  text-align: left;
+}
+details ul li:not(:last-child) {
+  border-bottom: 1px dashed #7B61FF;
+}
+
+/* open時のanimation */
+details[open] summary {
+  border-radius: 8px 8px 0 0;
+}
+
+details[open] summary span {
+  transform: rotate(180deg);
+}
+
+details[open] ul {
+  opacity: 1;
+  transform: translateY(0);
+}
+details[open] .column_name{
+  padding-right: 5px;
+}
+
+
+.register_form {
+  display:flex
+}
+
+.register_form .row{
+  display: flex;
+  flex-direction: row;
+}
+
+
+.register_form .cell{
+  width: 100px;
+}
+
+.register_form .title{
+  /* flex: 1; */
+  padding: 8px;
+  border: 1px solid #ccc;
+  text-align: left;
+  min-width: 0;
+  /* flex-basis: 150px; 列1の幅を固定 */
+  width: 100px;
+  overflow-wrap: break-word;
+}
+
+.register_form .content{
+  /* flex: 1; */
+  padding: 8px;
+  border: 1px solid #ccc;
+  text-align: center;
+  min-width: 0;
+  /* flex-basis: 150px; 列1の幅を固定 */
+  width: 150px;
+  overflow-wrap: break-word;
+}
+
+.show_content{
+  text-align: center;
 }
