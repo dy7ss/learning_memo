@@ -12,6 +12,13 @@ export const useMemoStore = defineStore('memo', {
             },
             search_word: {
                 subject_name: ""
+            },
+            register_form: {
+                subject_name: "",
+                used_time: "",
+                study_date: new Date(),
+                category: "",
+                remarks: ""
             }
         }
     },
@@ -19,6 +26,7 @@ export const useMemoStore = defineStore('memo', {
         init_store() {
             this.init_memos()
             this.init_search_word()
+            this.init_registerd_form()
         },
         init_memos() {
             this.memos.open_page_num = 1
@@ -28,6 +36,14 @@ export const useMemoStore = defineStore('memo', {
         },
         init_search_word() {
             this.search_word.subject_name = ""
+        },
+        init_registerd_form() {
+            this.register_form.subject_name = ""
+            this.register_form.used_time = ""
+            this.register_form.study_date = new Date()
+            this.register_form.category = ""
+            this.register_form.remarks = ""
+
         }
     }
 })

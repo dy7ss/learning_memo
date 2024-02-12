@@ -4,24 +4,18 @@ import { reactive } from "vue";
 import { useVuelidate } from '@vuelidate/core'
 import { required, integer, maxLength } from '@vuelidate/validators'
 import { onMounted } from "vue";
-
+import { useComposition } from "@/composition";
+import { useMemoStore } from '@/stores/memo';
 import { ref } from 'vue';
 import VueDatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css'
 
-
-
-// const url2 = "http://localhost:3000/db_insert";
+const { register_memo } = useComposition();
 const url2 = "https://ubj37r7okf64u5rszmgni6f3ke0mspzc.lambda-url.us-east-1.on.aws/ ";
 
+const memoStore = useMemoStore()
+const insert_form = memoStore.register_form;
 
-const insert_form = reactive({
-    subject_name: "",
-    used_time: "",
-    study_date: new Date(),
-    category: "",
-    remarks: ""
-})
 const rules = {
     subject_name: {
         required,
@@ -66,15 +60,7 @@ const insertData = async () => {
         //     subject_name: insert_form.subject_name,
         //     used_time: insert_form.used_time,
         //     study_date: insert_form.study_date
-        result = await axios.get(url2, {
-            params: {
-                subject_name: insert_form.subject_name,
-                used_time: insert_form.used_time,
-                study_date: insert_form.study_date,
-                category: insert_form.category,
-                remarks: insert_form.remarks,
-            }
-        });
+        result = await register_memo(insert_form)
         error_flag.status_code = ""
     } catch (error: any) {
         if (error.response.status === 422) {
