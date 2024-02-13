@@ -1,40 +1,5 @@
-<script setup lang="ts">
-import { reactive } from "vue";
-import { useVuelidate } from '@vuelidate/core'
-import { required, integer, maxLength } from '@vuelidate/validators'
-import { useComposition } from "@/composition";
-import { useMemoStore } from '@/stores/memo';
-import RegisterForm from "@/components/RegisterForm.vue";
-import '@vuepic/vue-datepicker/dist/main.css'
-
-// const { insertData } = useComposition();
-
-const memoStore = useMemoStore()
-const insert_form = memoStore.register_form;
-
-// TODO rulesとv$を外だししたい
-const rules = {
-    subject_name: {
-        required,
-        maxLength: maxLength(10)
-    },
-    used_time: {
-        required,
-        integer
-    },
-    category: {
-        required,
-        maxLength: maxLength(20)
-    },
-}
-
-const v$ = useVuelidate(rules, insert_form)
-
-</script>
-
 <template>
-    <RegisterForm></RegisterForm>
-    <!-- <p>データ登録</p>
+    <p>データ登録</p>
     <div class="register_form">
         <form>
             <div class="row">
@@ -76,5 +41,38 @@ const v$ = useVuelidate(rules, insert_form)
     </div>
 
     <hr>
-    <br><br><br><br> -->
+    <br><br><br><br>
 </template>
+
+
+<script setup lang="ts">
+import { useVuelidate } from '@vuelidate/core'
+import { required, integer, maxLength } from '@vuelidate/validators'
+import { useComposition } from "@/composition";
+import { useMemoStore } from '@/stores/memo';
+import '@vuepic/vue-datepicker/dist/main.css'
+
+const memoStore = useMemoStore()
+
+const { insertData } = useComposition();
+
+const insert_form = memoStore.register_form;
+
+const rules = {
+    subject_name: {
+        required,
+        maxLength: maxLength(10)
+    },
+    used_time: {
+        required,
+        integer
+    },
+    category: {
+        required,
+        maxLength: maxLength(20)
+    },
+}
+
+const v$ = useVuelidate(rules, insert_form)
+
+</script>

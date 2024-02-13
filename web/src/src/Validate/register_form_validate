@@ -1,0 +1,16 @@
+
+import { required, integer, maxLength } from '@vuelidate/validators'
+export const rules = {
+    subject_name: {
+        required,
+        maxLength: maxLength(10)
+    },
+    used_time: {
+        required,
+        integer
+    },
+    category: {
+        required,
+        maxLength: maxLength(20)
+    },
+}
