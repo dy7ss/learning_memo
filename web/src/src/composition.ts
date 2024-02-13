@@ -1,5 +1,3 @@
-
-import { ref } from 'vue';
 import axios from "axios";
 import type { Memo } from "@/types/Memo";
 import type { RegisterForm } from "@/types/RegisterForm";
