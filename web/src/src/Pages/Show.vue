@@ -1,7 +1,5 @@
 <script setup lang="ts">
-import { reactive } from "vue";
 import { onMounted } from "vue";
-import type { Memos } from "@/types/Memos";
 import { useComposition } from "@/composition";
 import MemoPanel from "@/components/MemoPanel.vue";
 import { useMemoStore } from '@/stores/memo';
@@ -9,11 +7,8 @@ import { useMemoStore } from '@/stores/memo';
 const { update_page, init_memos, clickSearchButton } = useComposition();
 
 const memoStore = useMemoStore()
-
 const memos = memoStore.memos;
-
 const search_word = memoStore.search_word;
-
 
 onMounted(async () => {
   await init_memos(memos)
