@@ -24,7 +24,6 @@ const delete_memo_param: any = { memo_id: "0123" };
                 </div>
             </li>
         </ul>
-
     </details>
 </template>
 <style module>
@@ -34,5 +33,9 @@ const delete_memo_param: any = { memo_id: "0123" };
 
 .icon {
     margin-left: 10px;
+}
+
+.icon:hover {
+    cursor: pointer;
 }
 </style>
