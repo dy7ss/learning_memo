@@ -1,6 +1,9 @@
 <script setup lang="ts">
-
+import { useComposition } from "@/composition";
+const { delete_memo } = useComposition();
 const props = defineProps(['item'])
+
+const delete_memo_param: any = { memo_id: "0123" };
 </script>
 
 <template>
@@ -15,7 +18,8 @@ const props = defineProps(['item'])
             <li><strong><span class="column_name">備考</span></strong>{{ item.remarks }}</li>
             <li>
                 <div :class="$style.icons_line">
-                    <img :class="$style.icon" src="@/assets/icon_garbagecan.svg" height="20">
+                    <img :class="$style.icon" src="@/assets/icon_garbagecan.svg" height="20"
+                        @click="delete_memo(delete_memo_param)">
                     <img :class="$style.icon" src="@/assets/icon_edit.svg" height="20">
                 </div>
             </li>

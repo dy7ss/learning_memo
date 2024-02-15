@@ -1,6 +1,7 @@
 import axios from "axios";
 import type { Memo } from "@/types/Memo";
 import type { RegisterForm } from "@/types/RegisterForm";
+import type { DeleteMemoForm } from "@/types/DeleteMemoForm";
 import { URL, PAGE_LIMIT } from "@/constants";
 import { useMemoStore } from '@/stores/memo';
 import { useVuelidate } from '@vuelidate/core'
@@ -131,6 +132,12 @@ export const useComposition = function () {
         memoStore.init_registerd_form()
     }
 
+
+    const delete_memo = async (params: DeleteMemoForm) => {
+        let result = await axios.get(URL.MEMO_DELETE, { params });
+        return result
+    };
+
     return {
         calc_max_page_num,
         get_page_record,
@@ -141,6 +148,7 @@ export const useComposition = function () {
         clickSearchButton,
         register_memo,
         clear_register_form,
-        insertData
+        insertData,
+        delete_memo
     }
 }

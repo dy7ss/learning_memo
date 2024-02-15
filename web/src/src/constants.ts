@@ -3,6 +3,8 @@ export const URL = {
     MEMO_GET: "https://zc2sgtjlxkryfifli5ogozn2oa0ybfdt.lambda-url.us-east-1.on.aws/",
     // 学習メモ登録API
     MEMO_REGISTER: "https://ubj37r7okf64u5rszmgni6f3ke0mspzc.lambda-url.us-east-1.on.aws/",
+    // 学習メモ削除API
+    MEMO_DELETE: "https://xxxx.lambda-url.us-east-1.on.aws/",
 }
 
 // 1ページあたりの最大表示件数
