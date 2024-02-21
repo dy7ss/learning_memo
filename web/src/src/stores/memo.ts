@@ -8,7 +8,7 @@ export const useMemoStore = defineStore('memo', {
                 open_page_num: 1,
                 result_all: [],
                 this_page_record: [],
-                max_page_num: 1
+                max_page_num: 1,
             },
             search_word: {
                 subject_name: ""
@@ -19,6 +19,10 @@ export const useMemoStore = defineStore('memo', {
                 study_date: new Date(),
                 category: "",
                 remarks: ""
+            },
+            delete_modal: {
+                is_display: false,
+                target_memo_id: ""
             }
         }
     },
@@ -27,6 +31,7 @@ export const useMemoStore = defineStore('memo', {
             this.init_memos()
             this.init_search_word()
             this.init_registerd_form()
+            this.init_delete_modal()
         },
         init_memos() {
             this.memos.open_page_num = 1
@@ -43,7 +48,11 @@ export const useMemoStore = defineStore('memo', {
             this.register_form.study_date = new Date()
             this.register_form.category = ""
             this.register_form.remarks = ""
-
+        },
+        init_delete_modal() {
+            this.delete_modal.is_display = false
+            // 仮の値
+            this.delete_modal.target_memo_id = ""
         }
     }
 })
