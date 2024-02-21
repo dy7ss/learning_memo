@@ -1,7 +1,6 @@
 import axios from "axios";
 import type { Memo } from "@/types/Memo";
 import type { RegisterForm } from "@/types/RegisterForm";
-import type { DeleteMemoForm } from "@/types/DeleteMemoForm";
 import { URL, PAGE_LIMIT } from "@/constants";
 import { useMemoStore } from '@/stores/memo';
 import { useVuelidate } from '@vuelidate/core'
@@ -137,15 +136,13 @@ export const useComposition = function () {
 
     // 渡すパラメータの形を整えたい
     const delete_memo = async (delete_modal: any) => {
-        let result = await axios.get(URL.MEMO_DELETE, { params: delete_modal });
+        let result = await axios.get(URL.MEMO_DELETE, { params: { memo_id: delete_modal.target_memo_id } });
         return result
     };
 
     const open_delete_modal = async (memo_id: string) => {
         memoStore.delete_modal.is_display = true;
         memoStore.delete_modal.target_memo_id = memo_id
-        // TODO 仮の値
-        // memoStore.delete_modal.target_memo_id = "0123"
     }
 
     return {

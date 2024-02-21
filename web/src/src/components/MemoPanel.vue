@@ -2,8 +2,6 @@
 import { useComposition } from "@/composition";
 const { open_delete_modal } = useComposition();
 const props = defineProps(['item'])
-
-const delete_memo_param: any = { memo_id: "0123" };
 </script>
 
 <template>

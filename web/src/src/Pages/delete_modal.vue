@@ -18,7 +18,6 @@ import { useMemoStore } from '@/stores/memo';
 
 const { delete_memo } = useComposition();
 
-// const props = defineProps(['modal_info'])
 const memoStore = useMemoStore()
 const button_name = "削除する"
 
