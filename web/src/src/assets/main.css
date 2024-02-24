@@ -15,25 +15,6 @@ a,
   transition: 0.4s;
 }
 
-/* @media (hover: hover) {
-  a:hover {
-    background-color: hsla(160, 100%, 37%, 0.2);
-  }
-}
-
-@media (min-width: 1024px) {
-  body {
-    display: flex;
-    place-items: center;
-  }
-
-  #app {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    padding: 0 2rem;
-  }
-} */
-
 div.pagination_link_list {
   display: flex;
 }
@@ -57,17 +38,18 @@ div.pagination_link_list {
   width: 200px;
 }
 
-.menu_list{
+.menu_list {
   text-align: center;
 }
 
-.menu{
+.menu {
   padding: 5px
 }
 
 details {
   padding: 10px;
-  justify-content:center;
+  justify-content: center;
+  max-width: 400px;
 }
 
 /* summary */
@@ -79,8 +61,7 @@ details summary {
   font-weight: bold;
   background: #7B61FF;
   color: #fff;
-  width: 400px;
-  /* width: 100%; */
+  width: 100%;
   padding: 16px;
   border-radius: 8px;
   list-style: none;
@@ -88,6 +69,7 @@ details summary {
   outline: none;
   transition: all 0.3s ease;
 }
+
 details summary::-webkit-details-marker {
   display: none;
 }
@@ -99,6 +81,7 @@ details summary span {
   transform-origin: -8px 0;
   transition: all 0.3s ease;
 }
+
 details summary span:before,
 details summary span:after {
   position: absolute;
@@ -108,10 +91,12 @@ details summary span:after {
   height: 2px;
   top: 50%;
 }
+
 details summary span:before {
   right: 8px;
   transform: rotate(45deg);
 }
+
 details summary span:after {
   right: 0;
   transform: rotate(-45deg);
@@ -130,12 +115,14 @@ details ul {
   opacity: 0;
   transform: translateY(-20px);
   transition: all 0.3s ease;
-  width: 400px;
+  width: 100%;
 }
+
 details ul li {
   padding: 12px;
   text-align: left;
 }
+
 details ul li:not(:last-child) {
   border-bottom: 1px dashed #7B61FF;
 }
@@ -153,26 +140,26 @@ details[open] ul {
   opacity: 1;
   transform: translateY(0);
 }
-details[open] .column_name{
+
+details[open] .column_name {
   padding-right: 5px;
 }
 
-
 .register_form {
-  display:flex
+  display: flex
 }
 
-.register_form .row{
+.register_form .row {
   display: flex;
   flex-direction: row;
 }
 
 
-.register_form .cell{
+.register_form .cell {
   width: 100px;
 }
 
-.register_form .title{
+.register_form .title {
   /* flex: 1; */
   padding: 8px;
   border: 1px solid #ccc;
@@ -183,7 +170,7 @@ details[open] .column_name{
   overflow-wrap: break-word;
 }
 
-.register_form .content{
+.register_form .content {
   /* flex: 1; */
   padding: 8px;
   border: 1px solid #ccc;
@@ -194,6 +181,6 @@ details[open] .column_name{
   overflow-wrap: break-word;
 }
 
-.show_content{
+.show_content {
   text-align: center;
 }
