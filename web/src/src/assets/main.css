@@ -67,7 +67,8 @@ div.pagination_link_list {
 
 details {
   padding: 10px;
-  justify-content:center;
+  justify-content: center;
+  max-width: 400px;
 }
 
 /* summary */
@@ -79,8 +80,8 @@ details summary {
   font-weight: bold;
   background: #7B61FF;
   color: #fff;
-  width: 400px;
-  /* width: 100%; */
+  /* width: 350px; */
+  width: 100%;
   padding: 16px;
   border-radius: 8px;
   list-style: none;
@@ -130,7 +131,8 @@ details ul {
   opacity: 0;
   transform: translateY(-20px);
   transition: all 0.3s ease;
-  width: 400px;
+  /* width: 350px; */
+  width: 100%;
 }
 details ul li {
   padding: 12px;
