@@ -23,5 +23,5 @@ jobs:
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        run: |　# S3のlearning-memo-protoバケットにデプロイ
+        run: |
           aws s3 cp --recursive --region us-east-1 build s3://learning-memo-proto
