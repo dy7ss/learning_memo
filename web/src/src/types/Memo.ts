@@ -4,4 +4,5 @@ export interface Memo {
     study_date: string,
     category: string,
     remarks: string,
+    memo_id: string
 }

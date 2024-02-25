@@ -2,6 +2,7 @@
 import { onMounted } from "vue";
 import { useComposition } from "@/composition";
 import MemoPanel from "@/components/MemoPanel.vue";
+import DeleteModal from "@/Pages/delete_modal.vue"
 import { useMemoStore } from '@/stores/memo';
 
 const { update_page, init_memos, clickSearchButton } = useComposition();
@@ -9,6 +10,7 @@ const { update_page, init_memos, clickSearchButton } = useComposition();
 const memoStore = useMemoStore()
 const memos = memoStore.memos;
 const search_word = memoStore.search_word;
+
 
 onMounted(async () => {
   await init_memos(memos)
@@ -41,5 +43,6 @@ onMounted(async () => {
         @click="update_page(memos, memos.result_all, memos.max_page_num)">≫</div>
     </div>
   </div>
+  <DeleteModal></DeleteModal>
 </template>
 

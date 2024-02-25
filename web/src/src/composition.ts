@@ -8,6 +8,9 @@ import { required, integer, maxLength } from '@vuelidate/validators'
 
 export const useComposition = function () {
 
+    const memoStore = useMemoStore()
+    const delete_modal_info = memoStore.delete_modal;
+
     const calc_max_page_num = function (result_all) {
         return Math.ceil(result_all.length / PAGE_LIMIT)
     }
@@ -131,6 +134,17 @@ export const useComposition = function () {
         memoStore.init_registerd_form()
     }
 
+    // 渡すパラメータの形を整えたい
+    const delete_memo = async (delete_modal: any) => {
+        let result = await axios.get(URL.MEMO_DELETE, { params: { memo_id: delete_modal.target_memo_id } });
+        return result
+    };
+
+    const open_delete_modal = async (memo_id: string) => {
+        memoStore.delete_modal.is_display = true;
+        memoStore.delete_modal.target_memo_id = memo_id
+    }
+
     return {
         calc_max_page_num,
         get_page_record,
@@ -141,6 +155,8 @@ export const useComposition = function () {
         clickSearchButton,
         register_memo,
         clear_register_form,
-        insertData
+        insertData,
+        delete_memo,
+        open_delete_modal
     }
 }
