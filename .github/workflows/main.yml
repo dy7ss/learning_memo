@@ -6,6 +6,9 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: web/src
     steps:
       - name: Checkout
         uses: actions/checkout@master  # リポジトリをチェックアウト
