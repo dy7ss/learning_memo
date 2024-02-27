@@ -11,9 +11,13 @@ const props = defineProps(['item'])
         </summary>
 
         <ul>
-            <li><strong><span class="column_name">学習日</span></strong> {{ item.study_date }}</li>
-            <li><strong><span class="column_name">学習時間</span></strong> {{ item.used_time }}</li>
-            <li><strong><span class="column_name">備考</span></strong>{{ item.remarks }}</li>
+            <li><strong><span class="column_name">
+                        <img :class="$style.icon" src="@/assets/icon_calendar.svg" height="20">
+                    </span></strong> {{ item.study_date }}</li>
+            <li><strong><span class="column_name">
+                        <img :class="$style.icon" src="@/assets/icon_clock.svg" height="20">
+                    </span></strong> {{ item.used_time }}</li>
+            <li>{{ item.remarks }}</li>
             <li>memoid: {{ item.memo_id }}</li>
             <li>
                 <div :class="$style.icons_line">
@@ -32,7 +36,9 @@ const props = defineProps(['item'])
 }
 
 .icon {
-    margin-left: 10px;
+    /* margin-left: 10px; */
+    margin-left: 5px;
+    margin-right: 5px;
 }
 
 .icon:hover {
