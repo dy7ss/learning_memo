@@ -49,8 +49,10 @@ div.pagination_link_list {
 details {
   padding: 10px;
   justify-content: center;
-  max-width: 400px;
-  min-width: 350px;
+  /* TODO 備考欄の文字数が多いとき、アコーディオン展開時にレイアウトが崩れるため暫定措置 */
+  /* max-width: 350px;
+  min-width: 350px; */
+  width: 350px;
   max-width: 90%;
   display: inline;
 }
