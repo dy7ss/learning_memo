@@ -26,7 +26,7 @@ const props = defineProps(['item'])
                     <img :class="$style.icon, $style.clickable" src="@/assets/icon_garbagecan.svg" height="20"
                         @click="open_delete_modal(item.memo_id)">
                     <img :class="[$style.clickable, $style.icon]" src="@/assets/icon_edit.svg" height="20"
-                        @click="open_edit_modal(item.memo_id)">
+                        @click="open_edit_modal(item)">
                 </div>
             </li>
         </ul>

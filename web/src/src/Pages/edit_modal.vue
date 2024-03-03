@@ -3,6 +3,9 @@
         <div class="modal-content">
             <span class="close" @click="close_modal()">&times;</span>
             <p>this is edit modal</p>
+            <p>{{ editModal }}</p>
+            <p><Button :name="button_name" @click="edit_memo(editModal)"></Button></p>
+            
         </div>
     </div>
 </template>
@@ -12,10 +15,10 @@ import Button from "@/components/Button.vue";
 
 import { useMemoStore } from '@/stores/memo';
 
-const { delete_memo } = useComposition();
+const { edit_memo } = useComposition();
 
 const memoStore = useMemoStore()
-const button_name = "削除する"
+const button_name = "修正する"
 
 const editModal = memoStore.edit_modal
 

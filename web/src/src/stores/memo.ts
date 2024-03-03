@@ -26,7 +26,7 @@ export const useMemoStore = defineStore('memo', {
             },
             edit_modal: {
                 is_display: false,
-                target_memo_id: ""
+                target_memo_info: null,
             }
 
         }
@@ -62,8 +62,7 @@ export const useMemoStore = defineStore('memo', {
         },
         init_edit_modal() {
             this.edit_modal.is_display = false
-            // 仮の値
-            this.edit_modal.target_memo_id = ""
+            this.edit_modal.target_memo_info = null
         }
 
     }
