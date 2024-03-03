@@ -145,6 +145,11 @@ export const useComposition = function () {
         memoStore.delete_modal.target_memo_id = memo_id
     }
 
+    const open_edit_modal = async (memo_id: string) => {
+        memoStore.edit_modal.is_display = true;
+        memoStore.edit_modal.target_memo_id = memo_id;
+    }
+
     return {
         calc_max_page_num,
         get_page_record,
@@ -157,6 +162,7 @@ export const useComposition = function () {
         clear_register_form,
         insertData,
         delete_memo,
-        open_delete_modal
+        open_delete_modal,
+        open_edit_modal
     }
 }
