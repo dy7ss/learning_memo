@@ -140,9 +140,23 @@ export const useComposition = function () {
         return result
     };
 
+    const edit_memo = async (edit_modal: any) => {
+        const updated_date = Date.now()
+        edit_modal.target_memo_info.updated_date = updated_date
+        const p = edit_modal.target_memo_info
+        const result = await axios.get(URL.MEMO_EDIT, { params: p });
+        return result
+    };
+
+
     const open_delete_modal = async (memo_id: string) => {
         memoStore.delete_modal.is_display = true;
         memoStore.delete_modal.target_memo_id = memo_id
+    }
+
+    const open_edit_modal = async (memo_info: any) => {
+        memoStore.edit_modal.is_display = true;
+        memoStore.edit_modal.target_memo_info = memo_info;
     }
 
     return {
@@ -157,6 +171,8 @@ export const useComposition = function () {
         clear_register_form,
         insertData,
         delete_memo,
-        open_delete_modal
+        open_delete_modal,
+        open_edit_modal,
+        edit_memo
     }
 }

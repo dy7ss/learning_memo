@@ -13,35 +13,36 @@ services:
         source: ./web/src
         target: /src
     tty: true
-  api:
-    container_name: api
-    build:
-      dockerfile: api/Dockerfile
-      context: .
-    ports:
-      - '3000:3000'
-    volumes:
-      - type: bind
-        source: ./api/src
-        target: /src
-    tty: true
-  db:
-    container_name: db
-    build:
-      dockerfile: ./db/Dockerfile
-      context: .
-    volumes:
-      - type: volume
-        source: docker-practice-db-store
-        target: /var/lib/mysql
-      - type: bind
-        source: db/init.sql
-        target: /docker-entrypoint-initdb.d/init.sql
-    environment:
-      MYSQL_ROOT_PASSWORD: rootpassword
-      MYSQL_USER: hoge
-      MYSQL_PASSWORD: password
-      MYSQL_DATABASE: event
 
-volumes:
-  docker-practice-db-store:
+#   api:
+#     container_name: api
+#     build:
+#       dockerfile: api/Dockerfile
+#       context: .
+#     ports:
+#       - '3000:3000'
+#     volumes:
+#       - type: bind
+#         source: ./api/src
+#         target: /src
+#     tty: true
+#   db:
+#     container_name: db
+#     build:
+#       dockerfile: ./db/Dockerfile
+#       context: .
+#     volumes:
+#       - type: volume
+#         source: docker-practice-db-store
+#         target: /var/lib/mysql
+#       - type: bind
+#         source: db/init.sql
+#         target: /docker-entrypoint-initdb.d/init.sql
+#     environment:
+#       MYSQL_ROOT_PASSWORD: rootpassword
+#       MYSQL_USER: hoge
+#       MYSQL_PASSWORD: password
+#       MYSQL_DATABASE: event
+
+# volumes:
+#   docker-practice-db-store:

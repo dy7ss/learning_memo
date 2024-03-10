@@ -23,7 +23,22 @@ export const useMemoStore = defineStore('memo', {
             delete_modal: {
                 is_display: false,
                 target_memo_id: ""
+            },
+            edit_modal: {
+                is_display: false,
+                target_memo_info: {
+                    "memo_id": "",
+                    "user_id": "",
+                    "category": "",
+                    "subject_name": "",
+                    "used_time": 0,
+                    "study_date": "",
+                    "create_date": "",
+                    "updated_date": "",
+                    "remarks": "remarks"
+                },
             }
+
         }
     },
     actions: {
@@ -32,6 +47,7 @@ export const useMemoStore = defineStore('memo', {
             this.init_search_word()
             this.init_registerd_form()
             this.init_delete_modal()
+            this.init_edit_modal()
         },
         init_memos() {
             this.memos.open_page_num = 1
@@ -53,6 +69,21 @@ export const useMemoStore = defineStore('memo', {
             this.delete_modal.is_display = false
             // 仮の値
             this.delete_modal.target_memo_id = ""
+        },
+        init_edit_modal() {
+            this.edit_modal.is_display = false
+            this.edit_modal.target_memo_info = {
+                "memo_id": "",
+                "user_id": "",
+                "category": "",
+                "subject_name": "",
+                "used_time": 0,
+                "study_date": "",
+                "create_date": "",
+                "updated_date": "",
+                "remarks": "remarks"
+            }
         }
+
     }
 })

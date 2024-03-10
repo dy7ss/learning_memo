@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { useComposition } from "@/composition";
-const { open_delete_modal } = useComposition();
+const { open_delete_modal, open_edit_modal } = useComposition();
+
 const props = defineProps(['item'])
 </script>
 
@@ -22,9 +23,10 @@ const props = defineProps(['item'])
             <li>
                 <div :class="$style.icons_line">
                     <!-- 親画面にメモIDとモーダル表示フラグtrueの情報を渡す -->
-                    <img :class="$style.icon" src="@/assets/icon_garbagecan.svg" height="20"
+                    <img :class="[$style.icon, $style.clickable]" src="@/assets/icon_garbagecan.svg" height="20"
                         @click="open_delete_modal(item.memo_id)">
-                    <img :class="$style.icon" src="@/assets/icon_edit.svg" height="20">
+                    <img :class="[$style.clickable, $style.icon]" src="@/assets/icon_edit.svg" height="20"
+                        @click="open_edit_modal(item)">
                 </div>
             </li>
         </ul>
@@ -41,7 +43,7 @@ const props = defineProps(['item'])
     margin-right: 5px;
 }
 
-.icon:hover {
+.clickable:hover {
     cursor: pointer;
 }
 </style>
