@@ -2,10 +2,28 @@
     <div v-if="editModal.is_display" class="modal">
         <div class="modal-content">
             <span class="close" @click="close_modal()">&times;</span>
-            <p>this is edit modal</p>
-            <p>{{ editModal }}</p>
+            <p>
+                <img :class="$style.icon" src="@/assets/icon_memo.svg" height="20">
+                {{ editModal.target_memo_info.subject_name }}
+            </p>
+            <p>
+                <img :class="$style.icon" src="@/assets/icon_folder.svg" height="20">
+                 {{ editModal.target_memo_info.category }}
+            </p>
+            <p>
+                <img :class="$style.icon" src="@/assets/icon_calendar.svg" height="20">
+                {{ editModal.target_memo_info.study_date }}
+            </p>
+            <p>
+                <img :class="$style.icon" src="@/assets/icon_clock.svg" height="20">
+                {{ editModal.target_memo_info.used_time }}
+            </p>
+            <p>
+                <img :class="$style.icon" src="@/assets/icon_edit.svg" height="20">
+
+                {{ editModal.target_memo_info.remarks }}
+            </p>
             <p><Button :name="button_name" @click="edit_memo(editModal)"></Button></p>
-            
         </div>
     </div>
 </template>
@@ -59,5 +77,19 @@ const close_modal = function () {
     color: black;
     text-decoration: none;
     cursor: pointer;
+}
+
+p{
+    border-bottom: 1px dashed #7B61FF;
+    text-align: left;
+    padding:12px;
+    color: #7B61FF
+}
+</style>
+
+<style module>
+.icon {
+    margin-left: 5px;
+    margin-right: 5px;
 }
 </style>

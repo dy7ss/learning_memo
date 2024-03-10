@@ -26,7 +26,17 @@ export const useMemoStore = defineStore('memo', {
             },
             edit_modal: {
                 is_display: false,
-                target_memo_info: null,
+                target_memo_info: {
+                    "memo_id": "",
+                    "user_id": "",
+                    "category": "",
+                    "subject_name": "",
+                    "used_time": 0,
+                    "study_date": "",
+                    "create_date": "",
+                    "updated_date": "",
+                    "remarks": "remarks"
+                },
             }
 
         }
@@ -62,7 +72,17 @@ export const useMemoStore = defineStore('memo', {
         },
         init_edit_modal() {
             this.edit_modal.is_display = false
-            this.edit_modal.target_memo_info = null
+            this.edit_modal.target_memo_info = {
+                "memo_id": "",
+                "user_id": "",
+                "category": "",
+                "subject_name": "",
+                "used_time": 0,
+                "study_date": "",
+                "create_date": "",
+                "updated_date": "",
+                "remarks": "remarks"
+            }
         }
 
     }
