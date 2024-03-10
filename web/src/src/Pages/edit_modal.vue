@@ -13,7 +13,7 @@
             </p>
             <p>
                 <img :class="$style.icon" src="@/assets/icon_calendar.svg" height="20">
-                <input type="text" v-model="editModal.target_memo_info.study_date" placeholder="">
+                <input type="date" v-model="editModal.target_memo_info.study_date" />
             </p>
             <p>
                 <img :class="$style.icon" src="@/assets/icon_clock.svg" height="20">
