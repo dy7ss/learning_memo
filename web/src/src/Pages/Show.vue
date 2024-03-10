@@ -3,6 +3,7 @@ import { onMounted } from "vue";
 import { useComposition } from "@/composition";
 import MemoPanel from "@/components/MemoPanel.vue";
 import DeleteModal from "@/Pages/delete_modal.vue"
+import EditModal from "@/Pages/edit_modal.vue"
 import { useMemoStore } from '@/stores/memo';
 
 const { update_page, init_memos, clickSearchButton } = useComposition();
@@ -44,5 +45,6 @@ onMounted(async () => {
     </div>
   </div>
   <DeleteModal></DeleteModal>
+  <EditModal></EditModal>
 </template>
 
