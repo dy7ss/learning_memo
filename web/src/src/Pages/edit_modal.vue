@@ -4,24 +4,24 @@
             <span class="close" @click="close_modal()">&times;</span>
             <p>
                 <img :class="$style.icon" src="@/assets/icon_memo.svg" height="20">
-                {{ editModal.target_memo_info.subject_name }}
+                
+                <input type="text" v-model="editModal.target_memo_info.subject_name" placeholder="">
             </p>
             <p>
                 <img :class="$style.icon" src="@/assets/icon_folder.svg" height="20">
-                 {{ editModal.target_memo_info.category }}
+                 <input type="text" v-model="editModal.target_memo_info.category" placeholder="">
             </p>
             <p>
                 <img :class="$style.icon" src="@/assets/icon_calendar.svg" height="20">
-                {{ editModal.target_memo_info.study_date }}
+                <input type="text" v-model="editModal.target_memo_info.study_date" placeholder="">
             </p>
             <p>
                 <img :class="$style.icon" src="@/assets/icon_clock.svg" height="20">
-                {{ editModal.target_memo_info.used_time }}
+                <input type="text" v-model="editModal.target_memo_info.used_time" placeholder="">(分)
             </p>
             <p>
                 <img :class="$style.icon" src="@/assets/icon_edit.svg" height="20">
-
-                {{ editModal.target_memo_info.remarks }}
+                <textarea name="kansou" rows="4" cols="30" v-model="editModal.target_memo_info.remarks"></textarea>
             </p>
             <p><Button :name="button_name" @click="edit_memo(editModal)"></Button></p>
         </div>
@@ -84,6 +84,19 @@ p{
     text-align: left;
     padding:12px;
     color: #7B61FF
+}
+
+textarea{
+    color:#7B61FF;
+    border:none;
+    font-size: 15px;
+}
+
+input{
+    color:#7B61FF;
+    border:none;
+    font-size: 15px;
+    /* border-bottom: 1px dashed #7B61FF; */
 }
 </style>
 
