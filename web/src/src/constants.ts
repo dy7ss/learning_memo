@@ -1,12 +1,14 @@
+const LAMBDA_DOMAIN = import.meta.env.VITE_Lambda_Domain
+
 export const URL = {
     // 学習メモ取得API
-    MEMO_GET: "https://zc2sgtjlxkryfifli5ogozn2oa0ybfdt.lambda-url.us-east-1.on.aws/",
+    MEMO_GET: LAMBDA_DOMAIN + "memo/get-list",
     // 学習メモ登録API
-    MEMO_REGISTER: "https://ubj37r7okf64u5rszmgni6f3ke0mspzc.lambda-url.us-east-1.on.aws/",
+    MEMO_REGISTER: LAMBDA_DOMAIN + "memo/insert",
     // 学習メモ削除API
-    MEMO_DELETE: "https://drx4u7ukt73vurzyokdjoapscu0wugjh.lambda-url.us-east-1.on.aws/",
+    MEMO_DELETE: LAMBDA_DOMAIN + "memo/delete",
     // 学習メモ編集API
-    MEMO_EDIT: "https://vqeqduojyuu2eu7ojcocfexyru0urthj.lambda-url.us-east-1.on.aws/"
+    MEMO_EDIT: LAMBDA_DOMAIN + "memo/update"
 }
 
 // 1ページあたりの最大表示件数
