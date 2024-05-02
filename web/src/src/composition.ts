@@ -60,7 +60,7 @@ export const useComposition = function () {
 
     const init_memos = async (memos) => {
         const result = await getData()
-        memos.result_all = result.data
+        memos.result_all = result.data.result
         update_page(memos, memos.result_all, 1)
         const page_max_num = await calc_max_page_num(memos.result_all)
         console.log(page_max_num)
