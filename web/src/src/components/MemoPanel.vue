@@ -17,9 +17,11 @@ const props = defineProps(['item'])
                     </span></strong> {{ item.study_date }}</li>
             <li><strong><span class="column_name">
                         <img :class="$style.icon" src="@/assets/icon_clock.svg" height="20">
-                    </span></strong> {{ item.used_time }}</li>
-            <li>{{ item.remarks }}</li>
-            <li>memoid: {{ item.memo_id }}</li>
+                    </span></strong> {{ item.used_time }}(分)</li>
+            <li><strong><span class="column_name">
+                        <img :class="$style.icon" src="@/assets/icon_edit.svg" height="20">
+                </span></strong>{{ item.remarks }}
+            </li>
             <li>
                 <div :class="$style.icons_line">
                     <!-- 親画面にメモIDとモーダル表示フラグtrueの情報を渡す -->
