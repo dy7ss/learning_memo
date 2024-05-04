@@ -145,7 +145,7 @@ export const useComposition = function () {
         const updated_date = Date.now()
         edit_modal.target_memo_info.updated_date = updated_date
         const p = edit_modal.target_memo_info
-        const result = await axios.get(URL.MEMO, { params: p });
+        const result = await axios.put(URL.MEMO + p.memo_id, p);
         return result
     };
 
