@@ -136,7 +136,6 @@ export const useComposition = function () {
         memoStore.init_registerd_form()
     }
 
-    // 渡すパラメータの形を整えたい
     const delete_memo = async (delete_modal: any) => {
         let result = await axios.delete(URL.MEMO + delete_modal.target_memo_id);
         return result
@@ -149,7 +148,6 @@ export const useComposition = function () {
         const result = await axios.get(URL.MEMO, { params: p });
         return result
     };
-
 
     const open_delete_modal = async (memo_id: string) => {
         memoStore.delete_modal.is_display = true;
