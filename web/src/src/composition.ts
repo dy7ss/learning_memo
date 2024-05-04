@@ -44,13 +44,13 @@ export const useComposition = function () {
     }
 
     const getData = async () => {
-        let result = await axios.get(URL.MEMO_GET);
+        let result = await axios.get(URL.MEMO);
         return result
     };
 
     // 検索処理
     const searchData = async (search_word) => {
-        let result = await axios.get(URL.MEMO_GET, {
+        let result = await axios.get(URL.MEMO, {
             params: {
                 subject_name: search_word.subject_name
             }
@@ -60,7 +60,7 @@ export const useComposition = function () {
 
     const init_memos = async (memos) => {
         const result = await getData()
-        memos.result_all = result.data.result
+        memos.result_all = result.data.memos
         update_page(memos, memos.result_all, 1)
         const page_max_num = await calc_max_page_num(memos.result_all)
         console.log(page_max_num)
@@ -123,9 +123,11 @@ export const useComposition = function () {
     };
 
     const register_memo = async (form: RegisterForm) => {
-        let result = await axios.get(URL.MEMO_REGISTER, {
-            params: form
-        });
+        form.used_time = parseInt(form.used_time)
+        // TODO: 画面で設定なしにすると現在時刻が設定される
+        form.study_date = new Date(form.study_date).toISOString()
+
+        let result = await axios.post(URL.MEMO, form);
         return result
     };
 
@@ -136,7 +138,7 @@ export const useComposition = function () {
 
     // 渡すパラメータの形を整えたい
     const delete_memo = async (delete_modal: any) => {
-        let result = await axios.get(URL.MEMO_DELETE, { params: { memo_id: delete_modal.target_memo_id } });
+        let result = await axios.delete(URL.MEMO + delete_modal.target_memo_id);
         return result
     };
 
@@ -144,7 +146,7 @@ export const useComposition = function () {
         const updated_date = Date.now()
         edit_modal.target_memo_info.updated_date = updated_date
         const p = edit_modal.target_memo_info
-        const result = await axios.get(URL.MEMO_EDIT, { params: p });
+        const result = await axios.get(URL.MEMO, { params: p });
         return result
     };
 

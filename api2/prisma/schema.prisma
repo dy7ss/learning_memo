@@ -14,7 +14,7 @@ datasource db {
 }
 
  model learning_list {
-  learning_id  Int       @id @default(autoincrement())
+  memo_id  Int       @id @default(autoincrement())
   user_id      Int?
   category     String?
   subject_name String

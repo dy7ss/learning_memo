@@ -3,6 +3,7 @@ version: '3'
 services:
   web:
     container_name: web
+    command: bash -c "cd /src && npm run dev"
     build:
       dockerfile: web/Dockerfile
       context: .
@@ -28,14 +29,10 @@ services:
       POSTGRES_PASSWORD: 'postgres'
     networks:
       - app-net
-# volumes:
-#   db-store:
-
-
-
 
   api:
     container_name: api2
+    command: bash -c "cd /src && npx ts-node src/index.ts"
     build:
       dockerfile: api2/Dockerfile
       context: .
@@ -48,26 +45,6 @@ services:
     tty: true
     networks:
       - app-net
-#   db:
-#     container_name: db
-#     build:
-#       dockerfile: ./db/Dockerfile
-#       context: .
-#     volumes:
-#       - type: volume
-#         source: docker-practice-db-store
-#         target: /var/lib/mysql
-#       - type: bind
-#         source: db/init.sql
-#         target: /docker-entrypoint-initdb.d/init.sql
-#     environment:
-#       MYSQL_ROOT_PASSWORD: rootpassword
-#       MYSQL_USER: hoge
-#       MYSQL_PASSWORD: password
-#       MYSQL_DATABASE: event
-
-# volumes:
-#   docker-practice-db-store:
 
 networks:
   app-net:
