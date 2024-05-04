@@ -8,7 +8,7 @@ create table todo
 );
 create table learning_list
 (
-    learning_id SERIAL primary key,
+    memo_id SERIAL primary key,
     user_id int,
     category varchar(100),
     subject_name varchar(100) not null,

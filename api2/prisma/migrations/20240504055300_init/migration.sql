@@ -9,7 +9,7 @@ DROP TABLE "User";
 
 -- CreateTable
 CREATE TABLE "learning_list" (
-    "learning_id" SERIAL NOT NULL,
+    "memo_id" SERIAL NOT NULL,
     "user_id" INTEGER,
     "category" TEXT,
     "subject_name" TEXT NOT NULL,
@@ -19,5 +19,5 @@ CREATE TABLE "learning_list" (
     "updated_date" TIMESTAMP(3),
     "remarks" TEXT,
 
-    CONSTRAINT "learning_list_pkey" PRIMARY KEY ("learning_id")
+    CONSTRAINT "learning_list_pkey" PRIMARY KEY ("memo_id")
 );

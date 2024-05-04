@@ -20,7 +20,7 @@ router.post("/", async (req: Request, res: Response) => {
 router.put("/:id", async (req: Request, res: Response) => {
     const { category, subject_name, used_time, study_date, remarks } = req.body;
     const user = await prisma.learning_list.update({
-        where: { learning_id: parseInt(req.params?.id) },
+        where: { memo_id: parseInt(req.params?.id) },
         data: { category, subject_name, used_time, study_date, remarks },
     });
     res.json({ user });
@@ -28,7 +28,7 @@ router.put("/:id", async (req: Request, res: Response) => {
 
 router.delete("/:id", async (req: Request, res: Response) => {
     const user = await prisma.learning_list.delete({
-        where: { learning_id: parseInt(req.params?.id) },
+        where: { memo_id: parseInt(req.params?.id) },
     });
     res.json({ user });
 });
