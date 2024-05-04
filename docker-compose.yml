@@ -13,19 +13,41 @@ services:
         source: ./web/src
         target: /src
     tty: true
+    networks:
+      - app-net
 
-#   api:
-#     container_name: api
-#     build:
-#       dockerfile: api/Dockerfile
-#       context: .
-#     ports:
-#       - '3000:3000'
-#     volumes:
-#       - type: bind
-#         source: ./api/src
-#         target: /src
-#     tty: true
+  db:
+    image: postgres:14
+    container_name: postgres_pta
+    ports:
+      - 5432:5432
+    volumes:
+      - ./db/init:/docker-entrypoint-initdb.d
+    environment:
+      POSTGRES_USER: 'user'
+      POSTGRES_PASSWORD: 'postgres'
+    networks:
+      - app-net
+# volumes:
+#   db-store:
+
+
+
+
+  api:
+    container_name: api2
+    build:
+      dockerfile: api2/Dockerfile
+      context: .
+    ports:
+      - '3000:3000'
+    volumes:
+      - type: bind
+        source: ./api2
+        target: /src
+    tty: true
+    networks:
+      - app-net
 #   db:
 #     container_name: db
 #     build:
@@ -46,3 +68,7 @@ services:
 
 # volumes:
 #   docker-practice-db-store:
+
+networks:
+  app-net:
+    driver: bridge
