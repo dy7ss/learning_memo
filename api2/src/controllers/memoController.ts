@@ -1,6 +1,5 @@
 import { PrismaClient } from "@prisma/client";
 import { Router, Request, Response } from "express";
-import { register } from "../models/memoModel";
 const memoService = require("../services/memoService")
 const commonUtil = require("../commonFunctions/util")
 const factory = require("../mappers/memoModelFactory")
@@ -22,11 +21,6 @@ router.put("/:id", async (req: Request, res: Response) => {
     const updateQueryInfo = factory.toUpdateQueryInfo(req);
     const result = await memoService.update(updateQueryInfo);
     res.json({ result })
-    // const user = await prisma.learning_list.update({
-    //     where: { memo_id: parseInt(req.params?.id) },
-    //     data: { category, subject_name, used_time, study_date, remarks },
-    // });
-    // res.json({ user });
 });
 
 router.delete("/:id", async (req: Request, res: Response) => {
