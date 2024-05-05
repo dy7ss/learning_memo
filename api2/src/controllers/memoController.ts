@@ -5,8 +5,21 @@ const prisma = new PrismaClient();
 const router = Router();
 
 router.get("/", async (req: Request, res: Response) => {
-    const memos = await prisma.learning_list.findMany();
-    res.json({ memos });
+    if (typeof req.query.keyword === "string") {
+        if (req.query.keyword) {
+            const memos = await prisma.learning_list.findMany({
+                where: {
+                    subject_name: {
+                        contains: req.query.keyword
+                    }
+                }
+            });
+            res.json({ memos });
+        }
+    } else {
+        const memos = await prisma.learning_list.findMany();
+        res.json({ memos });
+    }
 });
 
 router.post("/", async (req: Request, res: Response) => {
