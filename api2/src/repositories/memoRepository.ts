@@ -26,8 +26,17 @@ async function register(registerRequest: any) {
     return result;
 }
 
+async function update(updateQueryInfo: any) {
+    const result = await prisma.learning_list.update({
+        where: updateQueryInfo.key,
+        data: updateQueryInfo.data,
+    });
+    return result;
+}
+
 
 export {
     getList,
-    register
+    register,
+    update
 }

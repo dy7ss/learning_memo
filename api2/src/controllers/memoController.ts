@@ -9,7 +9,7 @@ const router = Router();
 
 router.get("/", async (req: Request, res: Response) => {
     const result = await memoService.getList(req.query.keyword)
-    res.json(result)
+    res.json({ result })
 });
 
 router.post("/", async (req: Request, res: Response) => {
@@ -19,12 +19,14 @@ router.post("/", async (req: Request, res: Response) => {
 });
 
 router.put("/:id", async (req: Request, res: Response) => {
-    const { category, subject_name, used_time, study_date, remarks } = req.body;
-    const user = await prisma.learning_list.update({
-        where: { memo_id: parseInt(req.params?.id) },
-        data: { category, subject_name, used_time, study_date, remarks },
-    });
-    res.json({ user });
+    const updateQueryInfo = factory.toUpdateQueryInfo(req);
+    const result = await memoService.update(updateQueryInfo);
+    res.json({ result })
+    // const user = await prisma.learning_list.update({
+    //     where: { memo_id: parseInt(req.params?.id) },
+    //     data: { category, subject_name, used_time, study_date, remarks },
+    // });
+    // res.json({ user });
 });
 
 router.delete("/:id", async (req: Request, res: Response) => {

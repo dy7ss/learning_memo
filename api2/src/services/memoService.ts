@@ -8,7 +8,12 @@ async function register(registerQueryInfo: any) {
     return repository.register(registerQueryInfo);
 }
 
+async function update(updateQueryInfo: any) {
+    return repository.update(updateQueryInfo);
+}
+
 export {
     getList,
-    register
+    register,
+    update
 }
