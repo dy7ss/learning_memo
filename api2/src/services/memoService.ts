@@ -4,11 +4,9 @@ async function getList(keyword: string) {
     return repository.getList(keyword);
 }
 
-async function register(registerRequest: any) {
-    return repository.register(registerRequest);
+async function register(registerQueryInfo: any) {
+    return repository.register(registerQueryInfo);
 }
-
-
 
 export {
     getList,

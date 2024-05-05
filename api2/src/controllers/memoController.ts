@@ -13,8 +13,8 @@ router.get("/", async (req: Request, res: Response) => {
 });
 
 router.post("/", async (req: Request, res: Response) => {
-    const registerRequest = factory.toRegisterRequest(req)
-    const result = await memoService.register(registerRequest)
+    const registerQueryInfo = factory.toRegisterQueryInfo(req)
+    const result = await memoService.register(registerQueryInfo)
     res.json({ result })
 });
 
