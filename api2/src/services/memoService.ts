@@ -12,8 +12,13 @@ async function update(updateQueryInfo: any) {
     return repository.update(updateQueryInfo);
 }
 
+async function cancel(id: number) {
+    return repository.cancel(id);
+}
+
 export {
     getList,
     register,
-    update
+    update,
+    cancel
 }

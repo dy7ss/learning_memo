@@ -24,10 +24,9 @@ router.put("/:id", async (req: Request, res: Response) => {
 });
 
 router.delete("/:id", async (req: Request, res: Response) => {
-    const user = await prisma.learning_list.delete({
-        where: { memo_id: parseInt(req.params?.id) },
-    });
-    res.json({ user });
+    const id = parseInt(req.params.id);
+    const result = await memoService.cancel(id);
+    res.json({ result });
 });
 
 export default router

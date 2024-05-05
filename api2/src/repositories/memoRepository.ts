@@ -34,9 +34,17 @@ async function update(updateQueryInfo: any) {
     return result;
 }
 
+async function cancel(id: number) {
+    const result = await prisma.learning_list.delete({
+        where: { memo_id: id },
+    });
+    return result;
+}
+
 
 export {
     getList,
     register,
-    update
+    update,
+    cancel
 }
