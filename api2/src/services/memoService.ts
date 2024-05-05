@@ -1,9 +1,10 @@
+import { toGetListQuery } from "../mappers/memoModelFactory";
 import { Repository } from "../repositories/memoRepository";
 const factory = require("../mappers/memoModelFactory")
 import { Request } from "express";
 
 async function getList(req: Request) {
-    const keyword: string = typeof req.query.keyword === 'string' ? req.query.keyword : '';
+    const keyword = toGetListQuery(req);
     return Repository.getList(keyword);
 }
 

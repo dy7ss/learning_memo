@@ -27,7 +27,13 @@ function toUpdateQueryInfo(req: any): updateQueryInfo {
     return updateQueryInfo;
 }
 
+function toGetListQuery(req: Request): string {
+    const keyword: string = typeof req.query.keyword === 'string' ? req.query.keyword : '';
+    return keyword;
+}
+
 export {
     toRegisterQueryInfo,
-    toUpdateQueryInfo
+    toUpdateQueryInfo,
+    toGetListQuery
 }
