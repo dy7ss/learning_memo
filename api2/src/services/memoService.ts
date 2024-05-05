@@ -1,19 +1,19 @@
-const repository = require("../repositories/memoRepository");
+import { Repository } from "../repositories/memoRepository";
 
 async function getList(keyword: string) {
-    return repository.getList(keyword);
+    return Repository.getList(keyword);
 }
 
 async function register(registerQueryInfo: any) {
-    return repository.register(registerQueryInfo);
+    return Repository.register(registerQueryInfo);
 }
 
 async function update(updateQueryInfo: any) {
-    return repository.update(updateQueryInfo);
+    return Repository.update(updateQueryInfo);
 }
 
 async function cancel(id: number) {
-    return repository.cancel(id);
+    return Repository.cancel(id);
 }
 
 export {

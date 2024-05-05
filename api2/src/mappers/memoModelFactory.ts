@@ -1,6 +1,8 @@
+import { registerQueryInfo } from "../types/RegisterQueryInfo";
+import { updateQueryInfo } from "../types/updateQueryInfo";
 
 
-function toRegisterQueryInfo(req: any) {
+function toRegisterQueryInfo(req: any): registerQueryInfo {
     const registerQueryInfo = {
         category: req?.body?.category,
         subject_name: req?.body?.subject_name,
@@ -10,7 +12,7 @@ function toRegisterQueryInfo(req: any) {
     return registerQueryInfo;
 }
 
-function toUpdateQueryInfo(req: any) {
+function toUpdateQueryInfo(req: any): updateQueryInfo {
     const updateQueryInfo = {
         key: {
             memo_id: req?.body?.memo_id
