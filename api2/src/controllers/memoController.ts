@@ -1,49 +1,26 @@
-import { PrismaClient } from "@prisma/client";
 import { Router, Request, Response } from "express";
-
-const prisma = new PrismaClient();
+const memoService = require("../services/memoService")
 const router = Router();
 
 router.get("/", async (req: Request, res: Response) => {
-    if (typeof req.query.keyword === "string") {
-        if (req.query.keyword) {
-            const memos = await prisma.learning_list.findMany({
-                where: {
-                    subject_name: {
-                        contains: req.query.keyword
-                    }
-                }
-            });
-            res.json({ memos });
-        }
-    } else {
-        const memos = await prisma.learning_list.findMany();
-        res.json({ memos });
-    }
+    const result = await memoService.getList(req)
+    res.json({ result })
 });
 
 router.post("/", async (req: Request, res: Response) => {
-    const { category, subject_name, used_time, study_date, remarks } = req.body;
-    const user = await prisma.learning_list.create({
-        data: { category, subject_name, used_time, study_date, remarks },
-    });
-    res.json({ user });
+
+    const result = await memoService.register(req)
+    res.json({ result })
 });
 
 router.put("/:id", async (req: Request, res: Response) => {
-    const { category, subject_name, used_time, study_date, remarks } = req.body;
-    const user = await prisma.learning_list.update({
-        where: { memo_id: parseInt(req.params?.id) },
-        data: { category, subject_name, used_time, study_date, remarks },
-    });
-    res.json({ user });
+    const result = await memoService.update(req);
+    res.json({ result })
 });
 
 router.delete("/:id", async (req: Request, res: Response) => {
-    const user = await prisma.learning_list.delete({
-        where: { memo_id: parseInt(req.params?.id) },
-    });
-    res.json({ user });
+    const result = await memoService.cancel(req);
+    res.json({ result });
 });
 
 export default router
