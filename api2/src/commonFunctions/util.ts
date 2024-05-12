@@ -4,6 +4,7 @@ function isRFC3339DateTime(value: string) {
     }
     try {
         const d = new Date(value);
+        d.toISOString();
         return true;
     } catch {
         return false;
