@@ -9,13 +9,16 @@ router.get("/", async (req: Request, res: Response) => {
     res.json({ result })
 });
 
-router.post("/", async (req: Request, res: Response) => {
+router.post("/", [body("used_time").isInt({ min: 3, max: 10 }), body("study_date").custom((value: string) => commonUtil.isRFC3339DateTime(value))], async (req: Request, res: Response) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(400).json({ errors: errors.array() });
+    }
 
     const result = await memoService.register(req)
     res.json({ result })
 });
 
-// TODO 時刻のバリデーションチェック
 router.put("/:id", [param("id").isInt(), body("used_time").isInt(), body("study_date").custom((value: string) => commonUtil.isRFC3339DateTime(value))], async (req: Request, res: Response) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -25,7 +28,7 @@ router.put("/:id", [param("id").isInt(), body("used_time").isInt(), body("study_
     res.json({ result })
 });
 
-router.delete("/:id", [param("id").isInt()], async (req: Request, res: Response) => {
+router.delete("/:id", async (req: Request, res: Response) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
         return res.status(400).json({ errors: errors.array() });
