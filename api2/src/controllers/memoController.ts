@@ -19,7 +19,7 @@ router.post("/", [body("used_time").isInt({ min: 3, max: 10 }), body("study_date
     res.json({ result })
 });
 
-router.put("/:id", [param("id").isInt(), body("used_time").isInt(), body("study_date").custom((value: string) => commonUtil.isRFC3339DateTime(value))], async (req: Request, res: Response) => {
+router.put("/:id", [body("used_time").isInt(), body("study_date").custom((value: string) => commonUtil.isRFC3339DateTime(value))], async (req: Request, res: Response) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
         return res.status(400).json({ errors: errors.array() });
