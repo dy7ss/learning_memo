@@ -45,7 +45,7 @@ export const useComposition = function () {
 
     const getData = async () => {
         let result = await axios.get(URL.MEMO);
-        return result
+        return result.data.result
     };
 
     // 検索処理
@@ -59,8 +59,7 @@ export const useComposition = function () {
     };
 
     const init_memos = async (memos) => {
-        const result = await getData()
-        memos.result_all = result.data.memos
+        memos.result_all = await getData()
         update_page(memos, memos.result_all, 1)
         const page_max_num = await calc_max_page_num(memos.result_all)
         console.log(page_max_num)
@@ -70,7 +69,7 @@ export const useComposition = function () {
     // 検索ボタンを押下したときの処理
     const clickSearchButton = async (memos, search_word) => {
         const result = await searchData(search_word)
-        memos.result_all = result.data
+        memos.result_all = result.data.result;
         console.log("result_all_clicksearchbutton", memos.result_all)
         const page_max_num = await calc_max_page_num(memos.result_all)
         console.log("pagemaxnum", page_max_num)

@@ -4,12 +4,12 @@ import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
 export class Repository {
-    static async getList(keyword: string) {
-        if (keyword) {
+    static async getList(subject_name: string) {
+        if (subject_name) {
             const result = await prisma.learning_list.findMany({
                 where: {
                     subject_name: {
-                        contains: keyword
+                        contains: subject_name
                     }
                 }
             });
