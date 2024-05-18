@@ -4,6 +4,7 @@ const factory = require("../mappers/memoModelFactory")
 import { Request } from "express";
 
 async function getList(req: Request) {
+    // TODO: 複数の抽出条件に対応する
     const keyword = toGetListQuery(req);
     return Repository.getList(keyword);
 }

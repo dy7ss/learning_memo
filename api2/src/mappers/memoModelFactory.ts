@@ -29,7 +29,7 @@ function toUpdateQueryInfo(req: Request): updateQueryInfo {
 }
 
 function toGetListQuery(req: Request): string {
-    const keyword: string = typeof req.query.keyword === 'string' ? req.query.keyword : '';
+    const keyword: string = typeof req.query.subject_name === 'string' ? req.query.subject_name : '';
     return keyword;
 }
 
