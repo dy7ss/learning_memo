@@ -24,3 +24,10 @@ datasource db {
   updated_date DateTime? @updatedAt
   remarks      String?
  }
+
+model User {
+  id          Int      @id @default(autoincrement())
+  user_id     String   @unique
+  password    String
+  create_date DateTime @default(now())
+}
