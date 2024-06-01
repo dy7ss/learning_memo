@@ -3,7 +3,19 @@
 
 GET http://localhost:3000/memo/
 content-type: application/json
-authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxMjMiLCJlbWFpbCI6ImV4YW1wbGUuY29tIiwiaWF0IjoxNzE2NzEwOTUxLCJleHAiOjE3MTg3MTA5NTF9.bvnm3ar2JGcvj3TqnQgDV88uzu84CqMerxYVwa7487U
+authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxMjMiLCJlbWFpbCI6ImV4YW1wbGUuY29tIiwiaWF0IjoxNzE3MjYwMjczLCJleHAiOjE3MTkyNjAyNzN9.VEX7I3KxEapBH2YhMXxA7ccg_W9g8wc5gzyty5Y4d-s
+
+
+
+### 認証検証用のリクエスト
+POST http://localhost:3000/login/login
+content-type: application/json
+
+{
+    "email": "123",
+    "password": "password"
+}
+
 
 ### 認証検証用のリクエスト
 POST http://localhost:3000/login/login

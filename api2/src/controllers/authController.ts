@@ -8,10 +8,10 @@ const router = Router();
 router.post("/login", async (req: Request, res: Response) => {
     try {
         const { body } = req;
-        const authInfo = await new authService().login(body)
+        const authInfo = await authService.login(body)
         res.json(authInfo)
     } catch (e) {
-        // todo
+        console.log(e)
     }
 });
 

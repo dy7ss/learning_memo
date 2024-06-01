@@ -1,33 +1,30 @@
+import { Repository } from "../repositories/authRepository";
+
 const jwt = require("jsonwebtoken");
-const User = require("../models/user");
 
-module.exports = class AuthService {
-    async login(body: any) {
-        const { email, password } = body;
-        // const loggedInUser = await User.findOne({
-        //     where: {
-        //         email,
-        //         password,
-        //     },
-        // });
-        const loggedInUser = { id: "123", email: "example.com" }
+async function login(body: any) {
+    const { email, password } = body;
+    const loggedInUser = await Repository.findUnique(email, password);
 
-        console.log("loggedInUser", loggedInUser)
+    if (!loggedInUser) throw new Error("Authorization failed!");
 
-
-        if (!loggedInUser) throw new Error("Authorization failed!");
-
-        try {
+    try {
+        if (loggedInUser && "user_id" in loggedInUser) {
             const token = jwt.sign(
-                { userId: loggedInUser.id, email: loggedInUser.email },
+                { userId: String(loggedInUser.user_id), email: loggedInUser.password },
+                // { userId: "123", email: "123" },
                 "SECRET_KEY",
                 { expiresIn: "2000000000" } // 10minutes
             );
             return token;
-        } catch {
-            throw new Error("Token generation failed!");
+        } else {
+            throw new Error("invalid user data");
         }
+    } catch {
+        throw new Error("Token generation failed!");
     }
+}
 
-    async signUp() { }
-};
+export {
+    login
+}

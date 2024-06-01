@@ -19,6 +19,16 @@ create table learning_list
     remarks varchar(1000)
 );
 
+create table users
+(
+    id SERIAL PRIMARY KEY,
+    user_id VARCHAR(255) UNIQUE NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    create_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+insert into users (user_id , password) values ('123', 'password');
+
 CREATE SCHEMA learning_memo;
 create table learning_memo.todo
 (

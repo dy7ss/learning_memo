@@ -25,7 +25,7 @@ datasource db {
   remarks      String?
  }
 
-model User {
+model users {
   id          Int      @id @default(autoincrement())
   user_id     String   @unique
   password    String
