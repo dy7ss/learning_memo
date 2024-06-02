@@ -7,12 +7,27 @@ const router = Router();
 
 router.post("/login", async (req: Request, res: Response) => {
     try {
-        const { body } = req;
-        const authInfo = await authService.login(body)
+        const user_id = req?.body?.user_id;
+        const password = req?.body?.password;
+        const authInfo = await authService.login(user_id, password)
         res.json(authInfo)
     } catch (e) {
         console.log(e)
+        res.json({ error: "invalid auth info." })
     }
 });
+
+router.post("/register", async (req: Request, res: Response) => {
+    try {
+        const user_id = req?.body?.user_id;
+        const password = req?.body?.password;
+
+        const result = await authService.register(user_id, password)
+        res.json(result)
+    } catch (e) {
+        console.log(e)
+        res.json({ error: "register user failed" })
+    }
+})
 
 export default router

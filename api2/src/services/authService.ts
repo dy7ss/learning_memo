@@ -2,9 +2,8 @@ import { Repository } from "../repositories/authRepository";
 
 const jwt = require("jsonwebtoken");
 
-async function login(body: any) {
-    const { email, password } = body;
-    const loggedInUser = await Repository.findUnique(email, password);
+async function login(user_id: string, password: string) {
+    const loggedInUser = await Repository.findUnique(user_id, password);
 
     if (!loggedInUser) throw new Error("Authorization failed!");
 
@@ -25,6 +24,12 @@ async function login(body: any) {
     }
 }
 
+async function register(user_id: string, password: string) {
+    const result = await Repository.register(user_id, password);
+    return result;
+}
+
 export {
-    login
+    login,
+    register
 }
