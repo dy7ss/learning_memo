@@ -158,6 +158,26 @@ export const useComposition = function () {
         memoStore.edit_modal.target_memo_info = memo_info;
     }
 
+    // ログイン用
+    // 検索処理
+    const auth_register = async (user_id: string, password: string) => {
+        let result = await axios.post(URL.AUTH, {
+            user_id: user_id,
+            password: password
+        });
+        console.log("register result")
+        console.log(result)
+        return result
+    };
+
+    const login = async (user_id: string, password: string) => {
+        let result = await axios.post(URL.LOGIN, {
+            user_id: user_id,
+            password: password
+        })
+        return result
+    }
+
     return {
         calc_max_page_num,
         get_page_record,
@@ -172,6 +192,8 @@ export const useComposition = function () {
         delete_memo,
         open_delete_modal,
         open_edit_modal,
-        edit_memo
+        edit_memo,
+        auth_register,
+        login
     }
 }
