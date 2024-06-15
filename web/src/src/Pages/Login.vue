@@ -1,23 +1,33 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
 import { useComposition } from "@/composition";
-
+import { useAuthStore } from '@/stores/auth';
 
 const userId = ref('');
 const password = ref('');
 
 const { login } = useComposition();
 
-const login_button = () => {
+const authStore = useAuthStore();
+
+const login_button = async () => {
   console.log('User ID:', user_id.value);
   console.log('Password:', password.value);
-  login(user_id.value, password.value)
+  const result = await login(user_id.value, password.value)
+  console.log("login result:", result.data)
+  authStore.set_token(result.data)
 
 };
+
+
+onMounted(async () => {
+  await authStore.init_store()
+})
+
 </script>
 
 <template>
-<div>login pages</div>
+<div>login page</div>
 
 
 <form >

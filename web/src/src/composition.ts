@@ -3,12 +3,15 @@ import type { Memo } from "@/types/Memo";
 import type { RegisterForm } from "@/types/RegisterForm";
 import { URL, PAGE_LIMIT } from "@/constants";
 import { useMemoStore } from '@/stores/memo';
+import { useAuthStore } from '@/stores/auth';
 import { useVuelidate } from '@vuelidate/core'
 import { required, integer, maxLength } from '@vuelidate/validators'
 
 export const useComposition = function () {
 
     const memoStore = useMemoStore()
+    const authStore = useAuthStore()
+
     const delete_modal_info = memoStore.delete_modal;
 
     const calc_max_page_num = function (result_all) {
@@ -175,6 +178,7 @@ export const useComposition = function () {
             user_id: user_id,
             password: password
         })
+        authStore.set_token(result.data)
         return result
     }
 

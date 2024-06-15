@@ -1,10 +1,18 @@
+### 認証情報登録
+POST http://localhost:3000/login/register
+content-type: application/json
+
+{
+    "user_id": "123456a7",
+    "password": "password"
+}
+
 
 ### 認証検証用のリクエスト
 
 GET http://localhost:3000/memo/
 content-type: application/json
-authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxMjMiLCJlbWFpbCI6ImV4YW1wbGUuY29tIiwiaWF0IjoxNzE3MjYwMjczLCJleHAiOjE3MTkyNjAyNzN9.VEX7I3KxEapBH2YhMXxA7ccg_W9g8wc5gzyty5Y4d-s
-
+authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxMjMiLCJlbWFpbCI6InBhc3N3b3JkIiwiaWF0IjoxNzE3MjY5OTkxLCJleHAiOjE3MTkyNjk5OTF9.GRoEKqrewFkUgt5yO-eRk2aABACwC6sADIWJgJeyR-A
 
 
 ### 認証検証用のリクエスト
@@ -12,7 +20,7 @@ POST http://localhost:3000/login/login
 content-type: application/json
 
 {
-    "email": "123",
+    "email": "123456",
     "password": "password"
 }
 
