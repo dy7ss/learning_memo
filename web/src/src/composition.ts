@@ -47,17 +47,29 @@ export const useComposition = function () {
     }
 
     const getData = async () => {
-        let result = await axios.get(URL.MEMO);
+        const headers = {
+            authorization: authStore.token
+        }
+        let result = await axios.get(URL.MEMO,
+            { headers: headers }
+        );
         return result.data.result
     };
 
     // 検索処理
     const searchData = async (search_word) => {
-        let result = await axios.get(URL.MEMO, {
-            params: {
-                subject_name: search_word.subject_name
+        const headers = {
+            authorization: authStore.token
+        }
+        const data = {
+            subject_name: search_word.subject_name
+        }
+        let result = await axios.get(URL.MEMO,
+            {
+                headers: headers,
+                params: data
             }
-        });
+        );
         return result
     };
 
@@ -73,9 +85,7 @@ export const useComposition = function () {
     const clickSearchButton = async (memos, search_word) => {
         const result = await searchData(search_word)
         memos.result_all = result.data.result;
-        console.log("result_all_clicksearchbutton", memos.result_all)
         const page_max_num = await calc_max_page_num(memos.result_all)
-        console.log("pagemaxnum", page_max_num)
         update_page(memos, memos.result_all, 1)
         memos.max_page_num = page_max_num
     };
@@ -168,8 +178,6 @@ export const useComposition = function () {
             user_id: user_id,
             password: password
         });
-        console.log("register result")
-        console.log(result)
         return result
     };
 
