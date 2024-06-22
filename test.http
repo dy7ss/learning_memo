@@ -1,1 +1,118 @@
+### 認証情報登録
+POST http://localhost:3000/login/register
+content-type: application/json
+
+{
+    "user_id": "123456a7",
+    "password": "password"
+}
+
+
+### 認証検証用のリクエスト
+
+GET http://localhost:3000/memo/
+content-type: application/json
+authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxMjMiLCJlbWFpbCI6InBhc3N3b3JkIiwiaWF0IjoxNzE3MjY5OTkxLCJleHAiOjE3MTkyNjk5OTF9.GRoEKqrewFkUgt5yO-eRk2aABACwC6sADIWJgJeyR-A
+
+
+### 認証検証用のリクエスト
+POST http://localhost:3000/login/login
+content-type: application/json
+
+{
+    "email": "123456",
+    "password": "password"
+}
+
+
+### 認証検証用のリクエスト
+POST http://localhost:3000/login/login
+content-type: application/json
+
+{
+    "id": "1234",
+    "email": "example.com"
+}
+
+### 認証検証用のリクエスト
+POST http://localhost:3000/login/login
+content-type: application/json
+
+{
+    "id": "123",
+    "email": "example.com"
+}
+
+
+
+
+###
+
+GET http://localhost:3000/login/
+
+###
+
+GET http://localhost:3000/memo/
+
+###
+
 GET http://localhost:3000/getMemoList
+
+###　有効なPOST
+POST http://localhost:3000/memo/
+content-type: application/json
+
+{
+    "category": "Linux",
+    "subject_name": "foobar",
+    "used_time": 100,
+    "study_date": "2024-05-04T12:00:00+02:00"
+}
+
+
+
+### 取得(抽出条件付与)
+GET http://localhost:3000/memo/?keyword=foo
+### 全件取得
+GET http://localhost:3000/memo/
+
+### 削除
+DELETE http://localhost:3000/memo/
+
+### 無効なDELETEリクエスト
+
+DELETE http://localhost:3000/memo/8ok
+
+
+
+###
+PUT http://localhost:3000/memo/7
+content-type: application/json
+
+{
+"category": "Linuxxx",
+"created_date":"2024-05-05T00:00:00.000Z",
+"memo_id": 3,
+"remarks": null,
+"study_date":"2024-05-04T00:00:00.000Z",
+"updated_date": 1714922908849,
+"used_time": 200,
+"user_id": null
+}
+
+
+###
+PUT http://localhost:3000/memo/7
+content-type: application/json
+
+{
+"category": "Linuxxx",
+"created_date":"2024-05-05T00:00:00.000Z",
+"memo_id": 3,
+"remarks": null,
+# "study_date":"2024-05-04T00:00:00.000Z",
+"study_date":"2024-06-04T00:00:00.000Z",
+"updated_date": 1714922908849,
+"used_time": 200,
+"user_id": null
+}

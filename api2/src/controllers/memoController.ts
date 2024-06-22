@@ -2,9 +2,10 @@ import { Router, Request, Response } from "express";
 const { body, param, validationResult } = require('express-validator');
 const commonUtil = require("../commonFunctions/util")
 const memoService = require("../services/memoService")
+const verifyAccessToken = require("../middlewares/verifyAccessToken");
 const router = Router();
 
-router.get("/", async (req: Request, res: Response) => {
+router.get("/", verifyAccessToken, async (req: Request, res: Response) => {
     const result = await memoService.getList(req)
     res.json({ result })
 });

@@ -3,12 +3,15 @@ import type { Memo } from "@/types/Memo";
 import type { RegisterForm } from "@/types/RegisterForm";
 import { URL, PAGE_LIMIT } from "@/constants";
 import { useMemoStore } from '@/stores/memo';
+import { useAuthStore } from '@/stores/auth';
 import { useVuelidate } from '@vuelidate/core'
 import { required, integer, maxLength } from '@vuelidate/validators'
 
 export const useComposition = function () {
 
     const memoStore = useMemoStore()
+    const authStore = useAuthStore()
+
     const delete_modal_info = memoStore.delete_modal;
 
     const calc_max_page_num = function (result_all) {
@@ -44,17 +47,29 @@ export const useComposition = function () {
     }
 
     const getData = async () => {
-        let result = await axios.get(URL.MEMO);
+        const headers = {
+            authorization: authStore.token
+        }
+        let result = await axios.get(URL.MEMO,
+            { headers: headers }
+        );
         return result.data.result
     };
 
     // 検索処理
     const searchData = async (search_word) => {
-        let result = await axios.get(URL.MEMO, {
-            params: {
-                subject_name: search_word.subject_name
+        const headers = {
+            authorization: authStore.token
+        }
+        const data = {
+            subject_name: search_word.subject_name
+        }
+        let result = await axios.get(URL.MEMO,
+            {
+                headers: headers,
+                params: data
             }
-        });
+        );
         return result
     };
 
@@ -70,9 +85,7 @@ export const useComposition = function () {
     const clickSearchButton = async (memos, search_word) => {
         const result = await searchData(search_word)
         memos.result_all = result.data.result;
-        console.log("result_all_clicksearchbutton", memos.result_all)
         const page_max_num = await calc_max_page_num(memos.result_all)
-        console.log("pagemaxnum", page_max_num)
         update_page(memos, memos.result_all, 1)
         memos.max_page_num = page_max_num
     };
@@ -158,6 +171,25 @@ export const useComposition = function () {
         memoStore.edit_modal.target_memo_info = memo_info;
     }
 
+    // ログイン用
+    // 検索処理
+    const auth_register = async (user_id: string, password: string) => {
+        let result = await axios.post(URL.AUTH, {
+            user_id: user_id,
+            password: password
+        });
+        return result
+    };
+
+    const login = async (user_id: string, password: string) => {
+        let result = await axios.post(URL.LOGIN, {
+            user_id: user_id,
+            password: password
+        })
+        authStore.set_token(result.data)
+        return result
+    }
+
     return {
         calc_max_page_num,
         get_page_record,
@@ -172,6 +204,8 @@ export const useComposition = function () {
         delete_memo,
         open_delete_modal,
         open_edit_modal,
-        edit_memo
+        edit_memo,
+        auth_register,
+        login
     }
 }
