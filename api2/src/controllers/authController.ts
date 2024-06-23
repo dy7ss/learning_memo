@@ -10,7 +10,7 @@ router.post("/login", async (req: Request, res: Response) => {
         const user_id = req?.body?.user_id;
         const password = req?.body?.password;
         const authInfo = await authService.login(user_id, password)
-        res.json(authInfo)
+        res.json({ result: authInfo })
     } catch (e) {
         console.log(e)
         res.json({ error: "invalid auth info." })

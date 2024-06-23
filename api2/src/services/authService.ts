@@ -11,9 +11,8 @@ async function login(user_id: string, password: string) {
         if (loggedInUser && "user_id" in loggedInUser) {
             const token = jwt.sign(
                 { userId: String(loggedInUser.user_id), email: loggedInUser.password },
-                // { userId: "123", email: "123" },
                 "SECRET_KEY",
-                { expiresIn: "2000000000" } // 10minutes
+                { expiresIn: "2000000000" }
             );
             return token;
         } else {
