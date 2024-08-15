@@ -3,7 +3,7 @@ POST http://localhost:3000/login/register
 content-type: application/json
 
 {
-    "user_id": "123456a7",
+    "user_id": "123456a",
     "password": "password"
 }
 
@@ -12,7 +12,7 @@ content-type: application/json
 
 GET http://localhost:3000/memo/
 content-type: application/json
-authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxMjMiLCJlbWFpbCI6InBhc3N3b3JkIiwiaWF0IjoxNzE3MjY5OTkxLCJleHAiOjE3MTkyNjk5OTF9.GRoEKqrewFkUgt5yO-eRk2aABACwC6sADIWJgJeyR-A
+authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxMjM0NTZhIiwiZW1haWwiOiJwYXNzd29yZCIsImlhdCI6MTcyMzczMzYzMSwiZXhwIjoxNzI1NzMzNjMxfQ.6bhUIRuEqe6yL6a0IRcoe09N-4bmv0jx5NbLxR9EAAM
 
 
 ### 認証検証用のリクエスト
@@ -20,7 +20,7 @@ POST http://localhost:3000/login/login
 content-type: application/json
 
 {
-    "email": "123456",
+    "user_id": "123456a",
     "password": "password"
 }
 
