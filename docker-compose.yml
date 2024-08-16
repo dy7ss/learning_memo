@@ -32,7 +32,7 @@ services:
 
   api:
     container_name: api2
-    command: bash -c "cd /src && npx ts-node src/index.ts"
+    command: bash -c "cd /src && npm install && npx --yes prisma migrate reset && npx --yes prisma migrate dev --name init && npx ts-node src/index.ts"
     build:
       dockerfile: api2/Dockerfile
       context: .
